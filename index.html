@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vladislav Smirnov — CV</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --page: #ffffff;
+      --text: #111827;
+      --muted: #4b5563;
+      --soft: #6b7280;
+      --line: #d9e0ea;
+      --accent: #2156d9;
+      --accent-soft: #eaf0ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      line-height: 1.32;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 16px auto;
+      background: var(--page);
+      box-shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
+      padding: 17mm 16mm 14mm;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1.72fr 0.98fr;
+      grid-template-areas:
+        "intro ."
+        "summary contacts";
+      gap: 12px 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--line);
+      align-items: start;
+    }
+
+    .header-main {
+      grid-area: intro;
+      min-width: 0;
+    }
+
+    .header-side {
+      grid-area: contacts;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .name {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+    }
+
+    .role {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .summary {
+      grid-area: summary;
+      margin: 0;
+      font-size: 12.3px;
+      line-height: 1.42;
+      color: var(--muted);
+      text-align: justify;
+      text-justify: inter-word;
+      text-align-last: left;
+      hyphens: auto;
+    }
+
+    .summary a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 0.06em;
+      text-underline-offset: 0.12em;
+    }
+
+    .summary a:hover {
+      color: #173f9b;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 0.82fr 1.48fr;
+      gap: 16px;
+      flex: 1 1 auto;
+    }
+
+    .sidebar,
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 9px 10px 10px;
+      background: #fff;
+    }
+
+    .contact-card {
+      padding: 11px 12px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 62px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      font-size: 11.5px;
+      line-height: 1.35;
+    }
+
+    .contact-tag {
+      color: var(--text);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .contact-value {
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .edu-item,
+    .project-item,
+    .skill-block,
+    .lang-item,
+    .exp-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .item-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+    }
+
+    .item-title {
+      font-size: 12.4px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .item-meta,
+    .item-sub,
+    .stack,
+    .small,
+    .lang-level {
+      font-size: 11.1px;
+      color: var(--soft);
+      margin: 0;
+    }
+
+    .item-meta {
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .item-sub {
+      color: var(--muted);
+    }
+
+    .project-link {
+      font-size: 11px;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 16px;
+      display: grid;
+      gap: 5px;
+    }
+
+    li {
+      font-size: 11.5px;
+      color: var(--text);
+    }
+
+    li::marker {
+      color: var(--accent);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .chip {
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #173f9b;
+      font-size: 10.5px;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .footer-line {
+      margin-top: auto;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #2156d9 0%, #2156d9 34%, #2f855a 34%, #2f855a 64%, #c76b00 64%, #c76b00 100%);
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 24px 18px;
+        box-shadow: none;
+      }
+
+      .header {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "intro"
+          "summary"
+          "contacts";
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        background: #fff;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .summary a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header class="header">
+      <div class="header-main">
+        <h1 class="name">Владислав Смирнов</h1>
+        <div class="role">Intern Data Engineer / Data Analyst</div>
+      </div>
+
+      <p class="summary">
+        Привет! Я аналитик с опытом в бухгалтерском аутсорсинге и онлайн-образовании. Сейчас учусь в
+        <a href="https://www.hse.ru/ma/mds/" target="_blank" rel="noreferrer">магистратуре по Data Science на ФКН ВШЭ</a>
+        и ищу стажировку в сфере инженерии данных. Собираю и проверяю данные из разных источников, готовлю сверки,
+        выборки и отчёты, нахожу узкие места в процессах, а также провожу продуктовые исследования и работаю с
+        метриками. Параллельно делаю свои проекты по работе с данными и инфраструктурой.
+      </p>
+
+      <div class="header-side">
+        <h2 class="section-title">Контакты</h2>
+        <div class="card contact-card">
+          <div class="contact-list">
+            <div class="contact-row">
+              <span class="contact-tag">TG</span>
+              <a class="contact-value" href="https://t.me/tadzhnahal" target="_blank" rel="noreferrer">@tadzhnahal</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-tag">Email</span>
+              <a class="contact-value" href="mailto:theycallmenoir@gmail.com">theycallmenoir@gmail.com</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-tag">LinkedIn</span>
+              <a class="contact-value" href="https://www.linkedin.com/in/vlad-smirnov-in/" target="_blank" rel="noreferrer">linkedin.com/in/vlad-smirnov-in</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-tag">GitHub</span>
+              <a class="contact-value" href="https://github.com/tadzhnahal" target="_blank" rel="noreferrer">github.com/tadzhnahal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <aside class="sidebar">
+        <section class="section">
+          <h2 class="section-title">Проекты</h2>
+
+          <div class="card project-item">
+            <div class="item-head">
+              <h3 class="item-title">ETL E-commerce Clickstream</h3>
+            </div>
+            <p class="small">ETL-пайплайн для данных интернет-магазина, который забирает события из PostgreSQL, обрабатывает их в Apache Spark и загружает результат в ClickHouse.</p>
+            <p class="stack">python · postgresql · clickhouse · apache spark · onetl · fastapi · celery · redis · docker</p>
+            <a class="project-link" href="https://github.com/tadzhnahal/etl-ecommerce-clickstream" target="_blank" rel="noreferrer">github.com/tadzhnahal/etl-ecommerce-clickstream</a>
+          </div>
+
+          <div class="card project-item">
+            <div class="item-head">
+              <h3 class="item-title">Analytics Impact Map</h3>
+            </div>
+            <p class="small">Учебный сервис, который помогает визуализировать жизненный цикл данных и управлять им.</p>
+            <p class="stack">python · streamlit · postgresql · docker compose</p>
+            <a class="project-link" href="https://github.com/tadzhnahal/analytics-impact-map" target="_blank" rel="noreferrer">github.com/tadzhnahal/analytics-impact-map</a>
+          </div>
+
+          <div class="card project-item">
+            <div class="item-head">
+              <h3 class="item-title">Reliability Lab</h3>
+            </div>
+            <p class="small">Учебная среда вокруг небольшого сервиса для сценариев с linux, сетями, контейнерами, мониторингом и разбором сбоев.</p>
+            <p class="stack">python · fastapi · bash · docker · github actions · kubernetes</p>
+            <a class="project-link" href="https://github.com/tadzhnahal/reliability-lab" target="_blank" rel="noreferrer">github.com/tadzhnahal/reliability-lab</a>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Образование</h2>
+          <div class="card edu-item">
+            <div class="item-head">
+              <h3 class="item-title">НИУ ВШЭ</h3>
+              <p class="item-meta">2025–2027</p>
+            </div>
+            <p class="item-sub">Магистратура, прикладная математика и информатика</p>
+          </div>
+          <div class="card edu-item">
+            <div class="item-head">
+              <h3 class="item-title">СПбГУ</h3>
+              <p class="item-meta">2023–2025</p>
+            </div>
+            <p class="item-sub">Магистратура, медиакоммуникации</p>
+          </div>
+          <div class="card edu-item">
+            <div class="item-head">
+              <h3 class="item-title">ВГУ</h3>
+              <p class="item-meta">2018–2023</p>
+            </div>
+            <p class="item-sub">Бакалавриат, журналистика</p>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Инструменты</h2>
+          <div class="card skill-block">
+            <div class="chips">
+              <span class="chip">python</span>
+              <span class="chip">bash</span>
+              <span class="chip">sql</span>
+              <span class="chip">postgresql</span>
+              <span class="chip">clickhouse</span>
+              <span class="chip">excel</span>
+              <span class="chip">google sheets</span>
+              <span class="chip">pandas</span>
+              <span class="chip">numpy</span>
+              <span class="chip">matplotlib</span>
+              <span class="chip">seaborn</span>
+              <span class="chip">apache spark</span>
+              <span class="chip">pyspark</span>
+              <span class="chip">apache airflow</span>
+              <span class="chip">fastapi</span>
+              <span class="chip">celery</span>
+              <span class="chip">redis</span>
+              <span class="chip">docker</span>
+              <span class="chip">kubernetes</span>
+              <span class="chip">linux</span>
+              <span class="chip">git</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Языки</h2>
+          <div class="card lang-item">
+            <div class="item-head">
+              <h3 class="item-title">English</h3>
+              <p class="lang-level">B2</p>
+            </div>
+            <div class="item-head">
+              <h3 class="item-title">Русский</h3>
+              <p class="lang-level">родной</p>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="main">
+        <section class="section">
+          <h2 class="section-title">Опыт</h2>
+
+          <div class="card exp-item">
+            <div class="item-head">
+              <h3 class="item-title">Eduson.tv · Аналитик-методолог</h3>
+              <p class="item-meta">июль 2024 — ноябрь 2025</p>
+            </div>
+            <p class="item-sub">EdTech · продуктовые исследования, метрики, разработка IT-курсов</p>
+            <ul>
+              <li>Разработал 150+ часов IT-контента по python, веб-разработке, автотестированию и управлению IT-проектами. Опирался на JTBD, LTV, CSAT, NPS, данные о вовлеченности и запросы студентов.</li>
+              <li>Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все учебные программы кластера.</li>
+              <li>Переработал 85% контента бесплатного курса по python по результатам A/B-тестов и анализа конверсии. Курс принес 3 продажи через неделю после запуска.</li>
+              <li>Провел 7+ исследований новых направлений и помог запустить разработку двух курсов. Параллельно сократил среднее время ответа поддержки на 60% и собрал фреймворк для других аналитиков кластера, который сократил время на поддержку студентов.</li>
+              <li>Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию и IT-управлению. Один из проектов сэкономил кластеру 300&nbsp;000+&nbsp;₽.</li>
+            </ul>
+          </div>
+
+          <div class="card exp-item">
+            <div class="item-head">
+              <h3 class="item-title">ООО «Учет и Налоги» · Младший аналитик данных</h3>
+              <p class="item-meta">январь 2024 — июль 2024</p>
+            </div>
+            <p class="item-sub">Финансовый аутсорсинг · 1С, Excel, ЭДО, SQL-сверки и управленческая отчетность</p>
+            <ul>
+              <li>Собрал единый реестр по 30 клиентам и связал услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Бухгалтеры ускорили поиск данных на 30%.</li>
+              <li>Написал пакет SQL-сверок по оплатам, услугам и отчетным периодам. Бухгалтеры стали быстрее находить неоплаченные счета на 60–90 тыс. ₽ в квартал, а доля просроченной дебиторки снизилась на 12–15%.</li>
+              <li>Очистил карточки клиентов и реестры от дублей, пустых полей и ошибок. Бухгалтеры сэкономили 5–6 часов в неделю на ручных сверках.</li>
+              <li>Собрал управленческий отчет по срокам сдачи и статусам отчетности. Число срочных задач в конце месяца снизилось примерно на 20%.</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div class="footer-line"></div>
+  </article>
+</body>
+</html>
