@@ -52,7 +52,7 @@
       display: grid;
       grid-template-columns: 1.72fr 0.98fr;
       grid-template-areas:
-        "intro ."
+        "intro action"
         "summary contacts";
       gap: 12px 18px;
       padding-bottom: 10px;
@@ -63,6 +63,14 @@
     .header-main {
       grid-area: intro;
       min-width: 0;
+    }
+
+    .header-actions {
+      grid-area: action;
+      min-width: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
     }
 
     .header-side {
@@ -109,6 +117,28 @@
     }
 
     .summary a:hover {
+      color: #173f9b;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--accent);
+      font-size: 11.2px;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
       color: #173f9b;
     }
 
@@ -265,7 +295,7 @@
       background: linear-gradient(90deg, #2156d9 0%, #2156d9 34%, #2f855a 34%, #2f855a 64%, #c76b00 64%, #c76b00 100%);
     }
 
-    @media (max-width: 980px) {
+    @media screen and (max-width: 980px) {
       .page {
         width: 100%;
         min-height: auto;
@@ -278,8 +308,13 @@
         grid-template-columns: 1fr;
         grid-template-areas:
           "intro"
+          "action"
           "summary"
           "contacts";
+      }
+
+      .header-actions {
+        justify-content: flex-start;
       }
 
       .content {
@@ -295,22 +330,62 @@
     @media print {
       html, body {
         background: #fff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
       }
 
       .page {
         width: 210mm;
         min-height: 297mm;
         margin: 0;
+        padding: 17mm 16mm 14mm;
         box-shadow: none;
+        background: #fff;
+        gap: 10px;
       }
 
-      a {
+      .header {
+        display: grid;
+        grid-template-columns: 1.72fr 0.98fr !important;
+        grid-template-areas:
+          "intro ."
+          "summary contacts" !important;
+        gap: 12px 18px !important;
+        align-items: start;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 0.82fr 1.48fr !important;
+        gap: 16px !important;
+      }
+
+      .sidebar,
+      .main {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .header-actions,
+      .download-btn {
+        display: none !important;
+      }
+
+      a,
+      .summary a,
+      .project-link,
+      .contact-value {
         text-decoration: none;
       }
 
       .summary a {
         color: inherit;
-        text-decoration: none;
       }
     }
   </style>
@@ -323,12 +398,14 @@
         <div class="role">Intern Data Engineer / Data Analyst</div>
       </div>
 
+      <div class="header-actions">
+        <a class="download-btn" href="Vladislav_Smirnov_CV.pdf" download="Vladislav_Smirnov_CV.pdf">Скачать CV в PDF</a>
+      </div>
+
       <p class="summary">
-        Привет! Я аналитик с опытом в бухгалтерском аутсорсинге и онлайн-образовании. Сейчас учусь в
-        <a href="https://www.hse.ru/ma/mds/" target="_blank" rel="noreferrer">магистратуре по Data Science на ФКН ВШЭ</a>
-        и ищу стажировку в сфере инженерии данных. Собираю и проверяю данные из разных источников, готовлю сверки,
-        выборки и отчёты, нахожу узкие места в процессах, а также провожу продуктовые исследования и работаю с
-        метриками. Параллельно делаю свои проекты по работе с данными и инфраструктурой.
+        Привет! Я студент
+        <a href="https://www.hse.ru/ma/mds/" target="_blank" rel="noreferrer">магистратуры ФКН ВШЭ по Data Science</a>
+        с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами и SRE. Больше всего мне интересно разбираться, как data-системы устроены «под капотом», и учиться делать их устойчивыми и надёжными.
       </p>
 
       <div class="header-side">
@@ -365,7 +442,7 @@
             <div class="item-head">
               <h3 class="item-title">ETL E-commerce Clickstream</h3>
             </div>
-            <p class="small">ETL-пайплайн для данных интернет-магазина, который забирает события из PostgreSQL, обрабатывает их в Apache Spark и загружает результат в ClickHouse.</p>
+            <p class="small">ETL-пайплайн для данных интернет-магазина, который забирает события из PostgreSQL, обрабатывает данные в Apache Spark и загружает результат в ClickHouse.</p>
             <p class="stack">python · postgresql · clickhouse · apache spark · onetl · fastapi · celery · redis · docker</p>
             <a class="project-link" href="https://github.com/tadzhnahal/etl-ecommerce-clickstream" target="_blank" rel="noreferrer">github.com/tadzhnahal/etl-ecommerce-clickstream</a>
           </div>
@@ -439,6 +516,8 @@
               <span class="chip">kubernetes</span>
               <span class="chip">linux</span>
               <span class="chip">git</span>
+              <span class="chip">продуктовая аналитика</span>
+              <span class="chip">продуктовые исследования</span>
             </div>
           </div>
         </section>
@@ -469,11 +548,12 @@
             </div>
             <p class="item-sub">EdTech · продуктовые исследования, метрики, разработка IT-курсов</p>
             <ul>
-              <li>Разработал 150+ часов IT-контента по python, веб-разработке, автотестированию и управлению IT-проектами. Опирался на JTBD, LTV, CSAT, NPS, данные о вовлеченности и запросы студентов.</li>
-              <li>Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все учебные программы кластера.</li>
-              <li>Переработал 85% контента бесплатного курса по python по результатам A/B-тестов и анализа конверсии. Курс принес 3 продажи через неделю после запуска.</li>
-              <li>Провел 7+ исследований новых направлений и помог запустить разработку двух курсов. Параллельно сократил среднее время ответа поддержки на 60% и собрал фреймворк для других аналитиков кластера, который сократил время на поддержку студентов.</li>
-              <li>Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию и IT-управлению. Один из проектов сэкономил кластеру 300&nbsp;000+&nbsp;₽.</li>
+              <li>Разработал 150+ часов IT-контента по python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.</li>
+              <li>Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все программы кластера.</li>
+              <li>Переработал 85% контента бесплатного курса по Python по результатам A/B-тестов и анализа конверсии. Курс принес 450&nbsp;000&nbsp;руб. через неделю после запуска.</li>
+              <li>Провел 7+ продуктовых исследований новых направлений и помог запустить разработку двух курсов, которые в течение двух недель после запуска сделали более 400% плана по месячной выручке.</li>
+              <li>Проанализировал процессы поддержки, выявил ключевые узкие места и ускорил среднее время ответа на вопрос студента на 60%, а также разработал фреймворк, который помог сократить расходы на разработку контента на 42%.</li>
+              <li>Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, который стал одним из флагманов кластера по выручке со средней оценкой студентов 4,6/5.</li>
             </ul>
           </div>
 
@@ -484,10 +564,10 @@
             </div>
             <p class="item-sub">Финансовый аутсорсинг · 1С, Excel, ЭДО, SQL-сверки и управленческая отчетность</p>
             <ul>
-              <li>Собрал единый реестр по 30 клиентам и связал услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Бухгалтеры ускорили поиск данных на 30%.</li>
-              <li>Написал пакет SQL-сверок по оплатам, услугам и отчетным периодам. Бухгалтеры стали быстрее находить неоплаченные счета на 60–90 тыс. ₽ в квартал, а доля просроченной дебиторки снизилась на 12–15%.</li>
-              <li>Очистил карточки клиентов и реестры от дублей, пустых полей и ошибок. Бухгалтеры сэкономили 5–6 часов в неделю на ручных сверках.</li>
-              <li>Собрал управленческий отчет по срокам сдачи и статусам отчетности. Число срочных задач в конце месяца снизилось примерно на 20%.</li>
+              <li>Собрал единый реестр по 30 клиентам и связал в нем услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Руководитель стал быстрее видеть долги, просрочки и клиентов с риском ухода, а команда сократила время на поиск данных на 30%.</li>
+              <li>Составил пакет sql-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.</li>
+              <li>Нашел дубли, пустые поля и ошибки в клиентских карточках и реестрах. Бухгалтеры стали тратить на ручные сверки на 6 часов в неделю меньше и успевали вести больше клиентских задач без потери качества.</li>
+              <li>Составил управленческий отчёт для руководителя по срокам сдачи и статусам отправки отчетности. Команда стала раньше замечать риск срыва срока, а число срочных задач в конце месяца снизилось на 20%.</li>
             </ul>
           </div>
         </section>
@@ -496,5 +576,41 @@
 
     <div class="footer-line"></div>
   </article>
+
+  <script>
+    (function () {
+      const selectors = ['.summary', '.small', '.item-sub', 'li'];
+      const shortWords = [
+        'а', 'и', 'в', 'во', 'к', 'ко', 'с', 'со', 'у',
+        'о', 'об', 'обо', 'по', 'за', 'из', 'от', 'до',
+        'на', 'но', 'не', 'для', 'при', 'под', 'над', 'без'
+      ];
+
+      const re = new RegExp(
+        `(^|[\\s\\u00A0(«"])(${shortWords.join('|')})(\\s+)`,
+        'gmi'
+      );
+
+      function fixText(text) {
+        return text.replace(re, (match, before, word) => {
+          return `${before}${word}\u00A0`;
+        });
+      }
+
+      function walk(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          node.nodeValue = fixText(node.nodeValue);
+          return;
+        }
+
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          if (['SCRIPT', 'STYLE', 'A'].includes(node.tagName)) return;
+          node.childNodes.forEach(walk);
+        }
+      }
+
+      document.querySelectorAll(selectors.join(', ')).forEach(walk);
+    })();
+  </script>
 </body>
 </html>
