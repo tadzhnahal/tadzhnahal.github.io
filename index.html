@@ -208,10 +208,11 @@
     }
 
     .edu-item,
-    .project-item,
     .skill-block,
     .lang-item,
-    .exp-item {
+    .exp-item,
+    .extra-item,
+    .project-item {
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -250,15 +251,38 @@
       color: var(--muted);
     }
 
+    .project-intro,
+    .project-status {
+      margin: 2px 0 4px;
+      padding: 8px 9px;
+      border-radius: 10px;
+      font-size: 11.2px;
+      line-height: 1.42;
+    }
+
+    .project-intro {
+      background: #f4f8ff;
+      border: 1px solid #d8e4ff;
+      color: var(--text);
+    }
+
+    .project-status {
+      background: #f7f9fc;
+      border: 1px solid #e3e8f0;
+      color: #334155;
+    }
+
     .project-link {
+      margin-top: 2px;
       font-size: 11px;
       color: var(--accent);
       overflow-wrap: anywhere;
     }
 
-    ul {
+    ul,
+    ol {
       margin: 0;
-      padding-left: 16px;
+      padding-left: 18px;
       display: grid;
       gap: 5px;
     }
@@ -270,6 +294,10 @@
 
     li::marker {
       color: var(--accent);
+    }
+
+    ol li::marker {
+      font-weight: 700;
     }
 
     .chips {
@@ -395,7 +423,7 @@
     <header class="header">
       <div class="header-main">
         <h1 class="name">Владислав Смирнов</h1>
-        <div class="role">Intern Data Engineer / Data Analyst</div>
+        <div class="role">Data Engineering Intern</div>
       </div>
 
       <div class="header-actions">
@@ -436,37 +464,6 @@
     <main class="content">
       <aside class="sidebar">
         <section class="section">
-          <h2 class="section-title">Проекты</h2>
-
-          <div class="card project-item">
-            <div class="item-head">
-              <h3 class="item-title">ETL E-commerce Clickstream</h3>
-            </div>
-            <p class="small">ETL-пайплайн для данных интернет-магазина, который забирает события из PostgreSQL, обрабатывает данные в Apache Spark и загружает результат в ClickHouse.</p>
-            <p class="stack">python · postgresql · clickhouse · apache spark · onetl · fastapi · celery · redis · docker</p>
-            <a class="project-link" href="https://github.com/tadzhnahal/etl-ecommerce-clickstream" target="_blank" rel="noreferrer">github.com/tadzhnahal/etl-ecommerce-clickstream</a>
-          </div>
-
-          <div class="card project-item">
-            <div class="item-head">
-              <h3 class="item-title">Analytics Impact Map</h3>
-            </div>
-            <p class="small">Учебный сервис, который помогает визуализировать жизненный цикл данных и управлять им.</p>
-            <p class="stack">python · streamlit · postgresql · docker compose</p>
-            <a class="project-link" href="https://github.com/tadzhnahal/analytics-impact-map" target="_blank" rel="noreferrer">github.com/tadzhnahal/analytics-impact-map</a>
-          </div>
-
-          <div class="card project-item">
-            <div class="item-head">
-              <h3 class="item-title">Reliability Lab</h3>
-            </div>
-            <p class="small">Учебная среда вокруг небольшого сервиса для сценариев с linux, сетями, контейнерами, мониторингом и разбором сбоев.</p>
-            <p class="stack">python · fastapi · bash · docker · github actions · kubernetes</p>
-            <a class="project-link" href="https://github.com/tadzhnahal/reliability-lab" target="_blank" rel="noreferrer">github.com/tadzhnahal/reliability-lab</a>
-          </div>
-        </section>
-
-        <section class="section">
           <h2 class="section-title">Образование</h2>
           <div class="card edu-item">
             <div class="item-head">
@@ -492,6 +489,34 @@
         </section>
 
         <section class="section">
+          <h2 class="section-title">Доп. образование</h2>
+
+          <div class="card extra-item">
+            <div class="item-head">
+              <h3 class="item-title">VK Education · Прикладная аналитика данных</h3>
+              <p class="item-meta">2026 — н.в.</p>
+            </div>
+            <p class="small">Разбираю Big Data, ETL, Data Quality, BI-системы, SQL, Python, скоринг, приоритизацию задач и работу с гипотезами. Курс помогает лучше понимать, как данные проходят путь от источника до решения в продукте.</p>
+          </div>
+
+          <div class="card extra-item">
+            <div class="item-head">
+              <h3 class="item-title">VK Education · DevOps/SRE-инженер</h3>
+              <p class="item-meta">2026 — н.в.</p>
+            </div>
+            <p class="small">Изучаю Linux, сети, веб-архитектуру, Docker, Kubernetes, мониторинг сервисов и типовые сбои в инфраструктуре. Курс помогает лучше понимать инфраструктуру прода, увереннее диагностировать сбои и точнее работать с надежностью сервисов.</p>
+          </div>
+
+          <div class="card extra-item">
+            <div class="item-head">
+              <h3 class="item-title">VK Education · Распределенные вычисления</h3>
+              <p class="item-meta">2026 — н.в.</p>
+            </div>
+            <p class="small">Изучаю сетевые протоколы, оптимизацию запросов, шардирование и репликацию. Дальше буду изучать NoSQL, Apache Kafka, SRE, observability и нагрузочное тестирование. Курс помогает лучше понимать, как работают высоконагруженные системы и как делать их устойчивыми.</p>
+          </div>
+        </section>
+
+        <section class="section">
           <h2 class="section-title">Инструменты</h2>
           <div class="card skill-block">
             <div class="chips">
@@ -508,8 +533,8 @@
               <span class="chip">seaborn</span>
               <span class="chip">apache spark</span>
               <span class="chip">pyspark</span>
-              <span class="chip">apache airflow</span>
               <span class="chip">fastapi</span>
+              <span class="chip">streamlit</span>
               <span class="chip">celery</span>
               <span class="chip">redis</span>
               <span class="chip">docker</span>
@@ -539,6 +564,56 @@
 
       <section class="main">
         <section class="section">
+          <h2 class="section-title">Проекты</h2>
+
+          <div class="card project-item">
+            <div class="item-head">
+              <h3 class="item-title">ETL E-commerce Clickstream</h3>
+            </div>
+            <p class="item-sub">python · postgresql · clickhouse · apache spark · onetl · fastapi · celery · redis · docker · kubernetes</p>
+            <p class="project-intro">Собрал ETL-пайплайн для данных интернет-магазина и выстроил полный маршрут данных от источника до аналитической витрины. Проект загружает данные в PostgreSQL, читает их с помощью onETL и Spark, обрабатывает в Spark и записывает результат в ClickHouse.</p>
+            <ol>
+              <li>Разделил пайплайн на полный и инкрементальный проход, вынес оба режима в отдельные Spark job и добавил HWM в YAML-файл. Это позволило отдельно запускать первый full snapshot, повторно прогонять весь набор данных и обрабатывать только новые данные после последней метки.</li>
+              <li>Собрал единые настройки сервиса через `config.yaml`, `.env`, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.</li>
+              <li>Поднял HTTP API на FastAPI и фоновые задачи на Celery с Redis. Через API можно запускать full и incremental ETL, смотреть статус конкретной задачи и хранить историю последних прогонов.</li>
+              <li>Доработал слой обработки, добавил фильтры для бот-активности и вынес чтение источника, трансформации и историю задач в отдельные сервисы, чтобы пайплайн было проще развивать и тестировать.</li>
+              <li>Подготовил два сценария запуска локально через Docker Compose и&nbsp;в&nbsp;Kubernetes через Dockerfile, spark-submit job и&nbsp;набор манифестов для&nbsp;Minikube.</li>
+            </ol>
+            <a class="project-link" href="https://github.com/tadzhnahal/etl-ecommerce-clickstream" target="_blank" rel="noreferrer">github.com/tadzhnahal/etl-ecommerce-clickstream</a>
+          </div>
+
+          <div class="card project-item">
+            <div class="item-head">
+              <h3 class="item-title">Reliability Lab</h3>
+            </div>
+            <p class="item-sub">python · bash · docker · linux · systemd</p>
+            <p class="project-intro">Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.</p>
+            <ol>
+              <li>Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.</li>
+              <li>Оформил отдельный сценарий со сбоем systemd, чтобы разбирать отказ сервиса, читать логи, находить причину поломки и вручную восстанавливать работу приложения.</li>
+              <li>Разложил проект по слоям `app`, `config`, `infra/docker`, `labs/linux/systemd-failure` и `scripts`, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.</li>
+            </ol>
+            <p class="project-status">Продолжаю работу над проектом и постепенно добавляю новые сценарии, чтобы собрать из него цельную учебную среду по Linux, сетям, контейнерам, мониторингу и разбору инцидентов.</p>
+            <a class="project-link" href="https://github.com/tadzhnahal/reliability-lab" target="_blank" rel="noreferrer">github.com/tadzhnahal/reliability-lab</a>
+          </div>
+
+          <div class="card project-item">
+            <div class="item-head">
+              <h3 class="item-title">Analytics Impact Map</h3>
+            </div>
+            <p class="item-sub">python · streamlit · postgresql · docker compose</p>
+            <p class="project-intro">Собираю сервис, который помогает визуализировать жизненный цикл данных и управлять связями между компонентами через backend, frontend и PostgreSQL-схему.</p>
+            <ol>
+              <li>Реализовал логику анализа зависимостей и подготовку графовых данных, чтобы показывать прямые связи между узлами и запускать разбор влияния изменений из интерфейса.</li>
+              <li>Доработал интерфейс на Streamlit, добавил графовое представление, подсветку затронутых узлов, формы для создания и удаления компонентов и зависимостей, а также перенес управление и анализ в сайдбар.</li>
+              <li>Настроил локальный запуск через Docker Compose и связал frontend, backend и базу, чтобы сервис было проще поднимать и проверять после каждой новой доработки.</li>
+            </ol>
+            <p class="project-status">Продолжаю работу над проектом и развиваю интерфейс и CRUD-сценарии, чтобы карта стала удобнее для реального разбора изменений в данных и сервисах.</p>
+            <a class="project-link" href="https://github.com/tadzhnahal/analytics-impact-map" target="_blank" rel="noreferrer">github.com/tadzhnahal/analytics-impact-map</a>
+          </div>
+        </section>
+
+        <section class="section">
           <h2 class="section-title">Опыт</h2>
 
           <div class="card exp-item">
@@ -548,12 +623,12 @@
             </div>
             <p class="item-sub">EdTech · продуктовые исследования, метрики, разработка IT-курсов</p>
             <ul>
-              <li>Разработал 150+ часов IT-контента по python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.</li>
+              <li>Разработал 150+ часов IT-контента по Python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.</li>
               <li>Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все программы кластера.</li>
               <li>Переработал 85% контента бесплатного курса по Python по результатам A/B-тестов и анализа конверсии. Курс принес 450&nbsp;000&nbsp;руб. через неделю после запуска.</li>
               <li>Провел 7+ продуктовых исследований новых направлений и помог запустить разработку двух курсов, которые в течение двух недель после запуска сделали более 400% плана по месячной выручке.</li>
               <li>Проанализировал процессы поддержки, выявил ключевые узкие места и ускорил среднее время ответа на вопрос студента на 60%, а также разработал фреймворк, который помог сократить расходы на разработку контента на 42%.</li>
-              <li>Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, который стал одним из флагманов кластера по выручке со средней оценкой студентов 4,6/5.</li>
+              <li>Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, один из которых стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.</li>
             </ul>
           </div>
 
@@ -562,7 +637,7 @@
               <h3 class="item-title">ООО «Учет и Налоги» · Младший аналитик данных</h3>
               <p class="item-meta">январь 2024 — июль 2024</p>
             </div>
-            <p class="item-sub">Финансовый аутсорсинг · 1С, Excel, ЭДО, SQL-сверки и управленческая отчетность</p>
+            <p class="item-sub">Финансовый аутсорсинг · 1С, Excel, ЭДО и управленческая отчетность</p>
             <ul>
               <li>Собрал единый реестр по 30 клиентам и связал в нем услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Руководитель стал быстрее видеть долги, просрочки и клиентов с риском ухода, а команда сократила время на поиск данных на 30%.</li>
               <li>Составил пакет sql-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.</li>
@@ -579,7 +654,7 @@
 
   <script>
     (function () {
-      const selectors = ['.summary', '.small', '.item-sub', 'li'];
+      const selectors = ['.summary', '.small', '.item-sub', 'li', '.project-intro', '.project-status'];
       const shortWords = [
         'а', 'и', 'в', 'во', 'к', 'ко', 'с', 'со', 'у',
         'о', 'об', 'обо', 'по', 'за', 'из', 'от', 'до',
