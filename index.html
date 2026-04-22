@@ -24,7 +24,11 @@
       background: var(--bg);
       color: var(--text);
       font-family: Inter, Arial, Helvetica, sans-serif;
-      line-height: 1.32;
+      line-height: 1.4;
+    }
+
+    body {
+      padding: 16px;
     }
 
     a {
@@ -37,89 +41,52 @@
     }
 
     .page {
-      width: 210mm;
-      min-height: 297mm;
-      margin: 16px auto;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
       background: var(--page);
       box-shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
-      padding: 17mm 16mm 14mm;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      padding: 18mm 16mm 16mm;
+      position: relative;
     }
 
-    .header {
-      display: grid;
-      grid-template-columns: 1.72fr 0.98fr;
-      grid-template-areas:
-        "intro action"
-        "summary contacts";
-      gap: 12px 18px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--line);
-      align-items: start;
+    .topbar {
+      margin-bottom: 10px;
+      padding-right: 230px;
     }
 
     .header-main {
-      grid-area: intro;
       min-width: 0;
-    }
-
-    .header-actions {
-      grid-area: action;
-      min-width: 0;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-    }
-
-    .header-side {
-      grid-area: contacts;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
     }
 
     .name {
       margin: 0;
-      font-size: 28px;
-      line-height: 1;
+      font-size: 30px;
+      line-height: 1.05;
       letter-spacing: -0.03em;
       font-weight: 800;
     }
 
     .role {
-      margin-top: 6px;
+      margin-top: 8px;
       font-size: 13px;
       color: var(--accent);
       font-weight: 700;
       letter-spacing: 0.02em;
     }
 
-    .summary {
-      grid-area: summary;
-      margin: 0;
-      font-size: 12.3px;
-      line-height: 1.42;
-      color: var(--muted);
-      text-align: justify;
-      text-justify: inter-word;
-      text-align-last: left;
-      hyphens: auto;
+    .header-actions {
+      position: absolute;
+      top: 18mm;
+      right: 16mm;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: flex-start;
     }
 
-    .summary a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-decoration-thickness: 0.06em;
-      text-underline-offset: 0.12em;
-    }
-
-    .summary a:hover {
-      color: #173f9b;
-    }
-
+    .lang-btn,
     .download-btn {
       display: inline-flex;
       align-items: center;
@@ -134,146 +101,114 @@
       line-height: 1.2;
       white-space: nowrap;
       transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      cursor: pointer;
     }
 
+    .lang-btn:hover,
     .download-btn:hover {
       background: var(--accent-soft);
       border-color: var(--accent);
       color: #173f9b;
     }
 
-    .content {
-      display: grid;
-      grid-template-columns: 0.82fr 1.48fr;
-      gap: 16px;
-      flex: 1 1 auto;
+    .contact-list {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px 14px;
+      align-items: baseline;
+      margin: 4px 0 16px;
+      font-size: 11.1px;
+      color: var(--muted);
+      overflow: hidden;
     }
 
-    .sidebar,
-    .main {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .contact-row {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .contact-tag {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .summary {
+      margin: 12px 0 16px;
+      font-size: 12.3px;
+      line-height: 1.46;
+      color: var(--muted);
     }
 
     .section {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section:first-of-type {
+      margin-top: 0;
     }
 
     .section-title {
-      margin: 0;
-      font-size: 10.5px;
+      margin: 0 0 10px;
+      font-size: 11px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
       font-weight: 800;
     }
 
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 9px 10px 10px;
-      background: #fff;
+    .block {
+      margin-bottom: 14px;
     }
 
-    .contact-card {
-      padding: 11px 12px;
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 9px;
-    }
-
-    .contact-row {
-      display: grid;
-      grid-template-columns: 62px minmax(0, 1fr);
-      gap: 8px;
-      align-items: start;
-      font-size: 11.5px;
-      line-height: 1.35;
-    }
-
-    .contact-tag {
-      color: var(--text);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .contact-value {
-      color: var(--muted);
-      overflow-wrap: anywhere;
-    }
-
-    .edu-item,
-    .skill-block,
-    .lang-item,
-    .exp-item,
-    .extra-item,
-    .project-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .block:last-child {
+      margin-bottom: 0;
     }
 
     .item-head {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       align-items: baseline;
+      margin-bottom: 3px;
     }
 
     .item-title {
-      font-size: 12.4px;
+      margin: 0;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--text);
-      margin: 0;
-    }
-
-    .item-meta,
-    .item-sub,
-    .stack,
-    .small,
-    .lang-level {
-      font-size: 11.1px;
-      color: var(--soft);
-      margin: 0;
     }
 
     .item-meta {
-      white-space: nowrap;
+      margin: 0;
+      font-size: 11.1px;
+      color: var(--soft);
       font-weight: 600;
+      white-space: nowrap;
     }
 
-    .item-sub {
+    .item-sub,
+    .small {
+      margin: 0 0 5px;
+      font-size: 11.2px;
       color: var(--muted);
     }
 
     .project-intro,
     .project-status {
-      margin: 2px 0 4px;
-      padding: 8px 9px;
-      border-radius: 10px;
+      margin: 6px 0;
       font-size: 11.2px;
-      line-height: 1.42;
-    }
-
-    .project-intro {
-      background: #f4f8ff;
-      border: 1px solid #d8e4ff;
       color: var(--text);
     }
 
-    .project-status {
-      background: #f7f9fc;
-      border: 1px solid #e3e8f0;
-      color: #334155;
-    }
-
     .project-link {
-      margin-top: 2px;
+      display: inline-block;
+      margin-top: 4px;
       font-size: 11px;
       color: var(--accent);
       overflow-wrap: anywhere;
@@ -281,7 +216,7 @@
 
     ul,
     ol {
-      margin: 0;
+      margin: 6px 0 0;
       padding-left: 18px;
       display: grid;
       gap: 5px;
@@ -303,50 +238,55 @@
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
+      gap: 6px;
     }
 
     .chip {
       padding: 4px 7px;
+      border: 1px solid var(--line);
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: #173f9b;
-      font-size: 10.5px;
+      background: #fff;
+      color: var(--text);
+      font-size: 10.6px;
       font-weight: 600;
       line-height: 1.1;
     }
 
     .footer-line {
-      margin-top: auto;
+      margin-top: 20px;
       height: 4px;
       border-radius: 999px;
       background: linear-gradient(90deg, #2156d9 0%, #2156d9 34%, #2f855a 34%, #2f855a 64%, #c76b00 64%, #c76b00 100%);
     }
 
-    @media screen and (max-width: 980px) {
-      .page {
-        width: 100%;
-        min-height: auto;
-        margin: 0;
-        padding: 24px 18px;
-        box-shadow: none;
+    @media (max-width: 760px) {
+      body {
+        padding: 0;
       }
 
-      .header {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "intro"
-          "action"
-          "summary"
-          "contacts";
+      .page {
+        max-width: none;
+        box-shadow: none;
+        padding: 24px 18px;
+      }
+
+      .topbar {
+        padding-right: 0;
       }
 
       .header-actions {
+        position: static;
+        margin-top: 12px;
         justify-content: flex-start;
       }
 
-      .content {
-        grid-template-columns: 1fr;
+      .contact-list {
+        flex-wrap: wrap;
+        gap: 6px 14px;
+      }
+
+      .contact-row {
+        white-space: normal;
       }
     }
 
@@ -368,323 +308,450 @@
       }
 
       .page {
+        max-width: none;
         width: 210mm;
         min-height: 297mm;
         margin: 0;
         padding: 17mm 16mm 14mm;
         box-shadow: none;
-        background: #fff;
-        gap: 10px;
+        position: relative;
       }
 
-      .header {
-        display: grid;
-        grid-template-columns: 1.72fr 0.98fr !important;
-        grid-template-areas:
-          "intro ."
-          "summary contacts" !important;
-        gap: 12px 18px !important;
-        align-items: start;
-      }
-
-      .content {
-        display: grid;
-        grid-template-columns: 0.82fr 1.48fr !important;
-        gap: 16px !important;
-      }
-
-      .sidebar,
-      .main {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
+      .topbar {
+        padding-right: 0;
       }
 
       .header-actions,
+      .lang-btn,
       .download-btn {
         display: none !important;
       }
 
       a,
-      .summary a,
       .project-link,
       .contact-value {
         text-decoration: none;
-      }
-
-      .summary a {
-        color: inherit;
       }
     }
   </style>
 </head>
 <body>
   <article class="page">
-    <header class="header">
+    <div class="topbar">
       <div class="header-main">
-        <h1 class="name">Владислав Смирнов</h1>
-        <div class="role">Data Engineering Intern</div>
+        <h1 class="name" data-i18n="name">Владислав Смирнов</h1>
+        <div class="role" data-i18n="role">Data Engineering Intern</div>
       </div>
 
       <div class="header-actions">
-        <a class="download-btn" href="Vladislav_Smirnov_CV.pdf" download="Vladislav_Smirnov_CV.pdf">Скачать CV в PDF</a>
+        <button class="lang-btn" id="langToggle" type="button">English</button>
+        <a class="download-btn" id="downloadBtn" href="Vladislav_Smirnov_CV.pdf" download="Vladislav_Smirnov_CV.pdf">Скачать CV в PDF</a>
+      </div>
+    </div>
+
+    <div class="contact-list">
+      <div class="contact-row"><span class="contact-tag">TG</span> <a href="https://t.me/tadzhnahal" target="_blank" rel="noreferrer">@tadzhnahal</a></div>
+      <div class="contact-row"><span class="contact-tag">Email</span> <a href="mailto:theycallmenoir@gmail.com">theycallmenoir@gmail.com</a></div>
+      <div class="contact-row"><span class="contact-tag">LinkedIn</span> <a href="https://www.linkedin.com/in/vlad-smirnov-in/" target="_blank" rel="noreferrer">linkedin.com/in/vlad-smirnov-in</a></div>
+      <div class="contact-row"><span class="contact-tag">GitHub</span> <a href="https://github.com/tadzhnahal" target="_blank" rel="noreferrer">github.com/tadzhnahal</a></div>
+    </div>
+
+    <p class="summary" data-i18n="summary">
+      Студент магистратуры ФКН ВШЭ по Data Science с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами, практиками DevOps и SRE. Больше всего мне интересно разбираться, как data-системы устроены «под капотом», и учиться делать их устойчивыми и надёжными.
+    </p>
+
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_projects">Проекты</h2>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title">ETL E-commerce Clickstream</h3>
+        </div>
+        <p class="item-sub">python · postgresql · clickhouse · apache spark · onetl · fastapi · celery · redis · docker · kubernetes</p>
+        <p class="project-intro" data-i18n="project_etl_intro">Собрал ETL-пайплайн для данных интернет-магазина и выстроил полный маршрут данных от источника до аналитической витрины. Проект загружает данные в PostgreSQL, читает их с помощью onETL и Spark, обрабатывает в Spark и записывает результат в ClickHouse.</p>
+        <ol>
+          <li data-i18n="project_etl_b1">Разделил пайплайн на полный и инкрементальный проход, вынес оба режима в отдельные Spark job и добавил HWM в YAML-файл. Это позволило отдельно запускать первый full snapshot, повторно прогонять весь набор данных и обрабатывать только новые данные после последней метки.</li>
+          <li data-i18n="project_etl_b2">Собрал единые настройки сервиса через `config.yaml`, `.env`, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.</li>
+          <li data-i18n="project_etl_b3">Поднял HTTP API на FastAPI и фоновые задачи на Celery с Redis. Через API можно запускать full и incremental ETL, смотреть статус конкретной задачи и хранить историю последних прогонов.</li>
+          <li data-i18n="project_etl_b4">Доработал слой обработки, добавил фильтры для бот-активности и вынес чтение источника, трансформации и историю задач в отдельные сервисы, чтобы пайплайн было проще развивать и тестировать.</li>
+          <li data-i18n="project_etl_b5">Подготовил два сценария запуска локально через Docker Compose и в Kubernetes через Dockerfile, spark-submit job и набор манифестов для Minikube.</li>
+        </ol>
+        <a class="project-link" href="https://github.com/tadzhnahal/etl-ecommerce-clickstream" target="_blank" rel="noreferrer">github.com/tadzhnahal/etl-ecommerce-clickstream</a>
       </div>
 
-      <p class="summary">
-        Привет! Я студент
-        <a href="https://www.hse.ru/ma/mds/" target="_blank" rel="noreferrer">магистратуры ФКН ВШЭ по Data Science</a>
-        с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами и SRE. Больше всего мне интересно разбираться, как data-системы устроены «под капотом», и учиться делать их устойчивыми и надёжными.
-      </p>
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title">Reliability Lab</h3>
+        </div>
+        <p class="item-sub">python · bash · docker · linux · systemd</p>
+        <p class="project-intro" data-i18n="project_rel_intro">Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.</p>
+        <ol>
+          <li data-i18n="project_rel_b1">Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.</li>
+          <li data-i18n="project_rel_b2">Оформил отдельный сценарий со сбоем systemd, чтобы разбирать отказ сервиса, читать логи, находить причину поломки и вручную восстанавливать работу приложения.</li>
+          <li data-i18n="project_rel_b3">Разложил проект по слоям `app`, `config`, `infra/docker`, `labs/linux/systemd-failure` и `scripts`, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.</li>
+        </ol>
+        <p class="project-status" data-i18n="project_rel_status">Продолжаю работу над проектом и постепенно добавляю новые сценарии, чтобы собрать из него цельную учебную среду по Linux, сетям, контейнерам, мониторингу и разбору инцидентов.</p>
+        <a class="project-link" href="https://github.com/tadzhnahal/reliability-lab" target="_blank" rel="noreferrer">github.com/tadzhnahal/reliability-lab</a>
+      </div>
 
-      <div class="header-side">
-        <h2 class="section-title">Контакты</h2>
-        <div class="card contact-card">
-          <div class="contact-list">
-            <div class="contact-row">
-              <span class="contact-tag">TG</span>
-              <a class="contact-value" href="https://t.me/tadzhnahal" target="_blank" rel="noreferrer">@tadzhnahal</a>
-            </div>
-            <div class="contact-row">
-              <span class="contact-tag">Email</span>
-              <a class="contact-value" href="mailto:theycallmenoir@gmail.com">theycallmenoir@gmail.com</a>
-            </div>
-            <div class="contact-row">
-              <span class="contact-tag">LinkedIn</span>
-              <a class="contact-value" href="https://www.linkedin.com/in/vlad-smirnov-in/" target="_blank" rel="noreferrer">linkedin.com/in/vlad-smirnov-in</a>
-            </div>
-            <div class="contact-row">
-              <span class="contact-tag">GitHub</span>
-              <a class="contact-value" href="https://github.com/tadzhnahal" target="_blank" rel="noreferrer">github.com/tadzhnahal</a>
-            </div>
-          </div>
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title">Analytics Impact Map</h3>
+        </div>
+        <p class="item-sub">python · streamlit · postgresql · docker compose</p>
+        <p class="project-intro" data-i18n="project_map_intro">Собираю сервис, который помогает визуализировать жизненный цикл данных и управлять связями между компонентами через backend, frontend и PostgreSQL-схему.</p>
+        <ol>
+          <li data-i18n="project_map_b1">Реализовал логику анализа зависимостей и подготовку графовых данных, чтобы показывать прямые связи между узлами и запускать разбор влияния изменений из интерфейса.</li>
+          <li data-i18n="project_map_b2">Доработал интерфейс на Streamlit, добавил графовое представление, подсветку затронутых узлов, формы для создания и удаления компонентов и зависимостей, а также перенес управление и анализ в сайдбар.</li>
+          <li data-i18n="project_map_b3">Настроил локальный запуск через Docker Compose и связал frontend, backend и базу, чтобы сервис было проще поднимать и проверять после каждой новой доработки.</li>
+        </ol>
+        <p class="project-status" data-i18n="project_map_status">Продолжаю работу над проектом и развиваю интерфейс и CRUD-сценарии, чтобы карта стала удобнее для реального разбора изменений в данных и сервисах.</p>
+        <a class="project-link" href="https://github.com/tadzhnahal/analytics-impact-map" target="_blank" rel="noreferrer">github.com/tadzhnahal/analytics-impact-map</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_experience">Опыт</h2>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="exp_eduson_title">Eduson.tv · Аналитик-методолог</h3>
+          <p class="item-meta" data-i18n="exp_eduson_meta">июль 2024 — ноябрь 2025</p>
+        </div>
+        <p class="item-sub" data-i18n="exp_eduson_sub">EdTech · продуктовые исследования, метрики и разработка IT-курсов</p>
+        <ul>
+          <li data-i18n="exp_eduson_b1">Разработал 150+ часов IT-контента по Python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.</li>
+          <li data-i18n="exp_eduson_b2">Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все программы кластера.</li>
+          <li data-i18n="exp_eduson_b3">Переработал 85% контента бесплатного курса по Python по результатам A/B-тестов и анализа конверсии. Курс принес 450 000 руб. через неделю после запуска.</li>
+          <li data-i18n="exp_eduson_b4">Провел 7+ продуктовых исследований новых направлений и помог запустить разработку двух курсов, которые в течение двух недель после запуска сделали более 400% плана по месячной выручке.</li>
+          <li data-i18n="exp_eduson_b5">Проанализировал процессы поддержки, выявил ключевые узкие места и ускорил среднее время ответа на вопрос студента на 60%, а также разработал фреймворк, который помог сократить расходы на разработку контента на 42%.</li>
+          <li data-i18n="exp_eduson_b6">Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, один из которых стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="exp_uin_title">ООО «Учет и Налоги» · Младший аналитик данных</h3>
+          <p class="item-meta" data-i18n="exp_uin_meta">январь 2024 — июль 2024</p>
+        </div>
+        <p class="item-sub" data-i18n="exp_uin_sub">Финансовый аутсорсинг · 1С, Excel, ЭДО и управленческая отчетность</p>
+        <ul>
+          <li data-i18n="exp_uin_b1">Собрал единый реестр по 30 клиентам и связал в нем услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Руководитель стал быстрее видеть долги, просрочки и клиентов с риском ухода, а команда сократила время на поиск данных на 30%.</li>
+          <li data-i18n="exp_uin_b2">Составил пакет sql-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.</li>
+          <li data-i18n="exp_uin_b3">Нашел дубли, пустые поля и ошибки в клиентских карточках и реестрах. Бухгалтеры стали тратить на ручные сверки на 6 часов в неделю меньше и успевали вести больше клиентских задач без потери качества.</li>
+          <li data-i18n="exp_uin_b4">Составил управленческий отчёт для руководителя по срокам сдачи и статусам отправки отчетности. Команда стала раньше замечать риск срыва срока, а число срочных задач в конце месяца снизилось на 20%.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_education">Образование</h2>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="edu_hse_title">НИУ ВШЭ</h3>
+          <p class="item-meta">2025–2027</p>
+        </div>
+        <p class="item-sub" data-i18n="edu_hse_sub">Магистратура, прикладная математика и информатика</p>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="edu_spbgu_title">СПбГУ</h3>
+          <p class="item-meta">2023–2025</p>
+        </div>
+        <p class="item-sub" data-i18n="edu_spbgu_sub">Магистратура, медиакоммуникации</p>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="edu_vgu_title">ВГУ</h3>
+          <p class="item-meta">2018–2023</p>
+        </div>
+        <p class="item-sub" data-i18n="edu_vgu_sub">Бакалавриат, журналистика</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_extra">Доп. образование</h2>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="extra_analytics_title">VK Education · Прикладная аналитика данных</h3>
+          <p class="item-meta" data-i18n="extra_meta_present">2026 — н.в.</p>
+        </div>
+        <p class="small" data-i18n="extra_analytics_text">Разбираю Big Data, ETL, Data Quality, BI-системы, SQL, Python, скоринг, приоритизацию задач и работу с гипотезами. Курс помогает лучше понимать, как данные проходят путь от источника до решения в продукте.</p>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="extra_devops_title">VK Education · DevOps/SRE-инженер</h3>
+          <p class="item-meta" data-i18n="extra_meta_present_2">2026 — н.в.</p>
+        </div>
+        <p class="small" data-i18n="extra_devops_text">Изучаю Linux, сети, веб-архитектуру, Docker, Kubernetes, мониторинг сервисов и типовые сбои в инфраструктуре. Курс помогает лучше понимать инфраструктуру прода, увереннее диагностировать сбои и точнее работать с надежностью сервисов.</p>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="extra_dist_title">VK Education · Распределенные вычисления</h3>
+          <p class="item-meta" data-i18n="extra_meta_present_3">2026 — н.в.</p>
+        </div>
+        <p class="small" data-i18n="extra_dist_text">Изучаю сетевые протоколы, оптимизацию запросов, шардирование и репликацию. Дальше буду изучать NoSQL, Apache Kafka, SRE, observability и нагрузочное тестирование. Курс помогает лучше понимать, как работают высоконагруженные системы и как делать их устойчивыми.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_tools">Инструменты</h2>
+      <div class="chips">
+        <span class="chip">python</span>
+        <span class="chip">bash</span>
+        <span class="chip">sql</span>
+        <span class="chip">postgresql</span>
+        <span class="chip">clickhouse</span>
+        <span class="chip">excel</span>
+        <span class="chip">google sheets</span>
+        <span class="chip">pandas</span>
+        <span class="chip">numpy</span>
+        <span class="chip">matplotlib</span>
+        <span class="chip">seaborn</span>
+        <span class="chip">apache spark</span>
+        <span class="chip">pyspark</span>
+        <span class="chip">apache airflow</span>
+        <span class="chip">fastapi</span>
+        <span class="chip">streamlit</span>
+        <span class="chip">celery</span>
+        <span class="chip">redis</span>
+        <span class="chip">minio</span>
+        <span class="chip">docker</span>
+        <span class="chip">kubernetes</span>
+        <span class="chip">linux</span>
+        <span class="chip">git</span>
+        <span class="chip" data-i18n="tool_product_analytics">продуктовая аналитика</span>
+        <span class="chip" data-i18n="tool_product_research">продуктовые исследования</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" data-i18n="sec_languages">Языки</h2>
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="lang_english">English</h3>
+          <p class="item-meta">B2</p>
         </div>
       </div>
-    </header>
-
-    <main class="content">
-      <aside class="sidebar">
-        <section class="section">
-          <h2 class="section-title">Образование</h2>
-          <div class="card edu-item">
-            <div class="item-head">
-              <h3 class="item-title">НИУ ВШЭ</h3>
-              <p class="item-meta">2025–2027</p>
-            </div>
-            <p class="item-sub">Магистратура, прикладная математика и информатика</p>
-          </div>
-          <div class="card edu-item">
-            <div class="item-head">
-              <h3 class="item-title">СПбГУ</h3>
-              <p class="item-meta">2023–2025</p>
-            </div>
-            <p class="item-sub">Магистратура, медиакоммуникации</p>
-          </div>
-          <div class="card edu-item">
-            <div class="item-head">
-              <h3 class="item-title">ВГУ</h3>
-              <p class="item-meta">2018–2023</p>
-            </div>
-            <p class="item-sub">Бакалавриат, журналистика</p>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2 class="section-title">Доп. образование</h2>
-
-          <div class="card extra-item">
-            <div class="item-head">
-              <h3 class="item-title">VK Education · Прикладная аналитика данных</h3>
-              <p class="item-meta">2026 — н.в.</p>
-            </div>
-            <p class="small">Разбираю Big Data, ETL, Data Quality, BI-системы, SQL, Python, скоринг, приоритизацию задач и работу с гипотезами. Курс помогает лучше понимать, как данные проходят путь от источника до решения в продукте.</p>
-          </div>
-
-          <div class="card extra-item">
-            <div class="item-head">
-              <h3 class="item-title">VK Education · DevOps/SRE-инженер</h3>
-              <p class="item-meta">2026 — н.в.</p>
-            </div>
-            <p class="small">Изучаю Linux, сети, веб-архитектуру, Docker, Kubernetes, мониторинг сервисов и типовые сбои в инфраструктуре. Курс помогает лучше понимать инфраструктуру прода, увереннее диагностировать сбои и точнее работать с надежностью сервисов.</p>
-          </div>
-
-          <div class="card extra-item">
-            <div class="item-head">
-              <h3 class="item-title">VK Education · Распределенные вычисления</h3>
-              <p class="item-meta">2026 — н.в.</p>
-            </div>
-            <p class="small">Изучаю сетевые протоколы, оптимизацию запросов, шардирование и репликацию. Дальше буду изучать NoSQL, Apache Kafka, SRE, observability и нагрузочное тестирование. Курс помогает лучше понимать, как работают высоконагруженные системы и как делать их устойчивыми.</p>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2 class="section-title">Инструменты</h2>
-          <div class="card skill-block">
-            <div class="chips">
-              <span class="chip">python</span>
-              <span class="chip">bash</span>
-              <span class="chip">sql</span>
-              <span class="chip">postgresql</span>
-              <span class="chip">clickhouse</span>
-              <span class="chip">excel</span>
-              <span class="chip">google sheets</span>
-              <span class="chip">pandas</span>
-              <span class="chip">numpy</span>
-              <span class="chip">matplotlib</span>
-              <span class="chip">seaborn</span>
-              <span class="chip">apache spark</span>
-              <span class="chip">pyspark</span>
-              <span class="chip">fastapi</span>
-              <span class="chip">streamlit</span>
-              <span class="chip">celery</span>
-              <span class="chip">redis</span>
-              <span class="chip">docker</span>
-              <span class="chip">kubernetes</span>
-              <span class="chip">linux</span>
-              <span class="chip">git</span>
-              <span class="chip">продуктовая аналитика</span>
-              <span class="chip">продуктовые исследования</span>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2 class="section-title">Языки</h2>
-          <div class="card lang-item">
-            <div class="item-head">
-              <h3 class="item-title">English</h3>
-              <p class="lang-level">B2</p>
-            </div>
-            <div class="item-head">
-              <h3 class="item-title">Русский</h3>
-              <p class="lang-level">родной</p>
-            </div>
-          </div>
-        </section>
-      </aside>
-
-      <section class="main">
-        <section class="section">
-          <h2 class="section-title">Проекты</h2>
-
-          <div class="card project-item">
-            <div class="item-head">
-              <h3 class="item-title">ETL E-commerce Clickstream</h3>
-            </div>
-            <p class="item-sub">python · postgresql · clickhouse · apache spark · onetl · fastapi · celery · redis · docker · kubernetes</p>
-            <p class="project-intro">Собрал ETL-пайплайн для данных интернет-магазина и выстроил полный маршрут данных от источника до аналитической витрины. Проект загружает данные в PostgreSQL, читает их с помощью onETL и Spark, обрабатывает в Spark и записывает результат в ClickHouse.</p>
-            <ol>
-              <li>Разделил пайплайн на полный и инкрементальный проход, вынес оба режима в отдельные Spark job и добавил HWM в YAML-файл. Это позволило отдельно запускать первый full snapshot, повторно прогонять весь набор данных и обрабатывать только новые данные после последней метки.</li>
-              <li>Собрал единые настройки сервиса через `config.yaml`, `.env`, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.</li>
-              <li>Поднял HTTP API на FastAPI и фоновые задачи на Celery с Redis. Через API можно запускать full и incremental ETL, смотреть статус конкретной задачи и хранить историю последних прогонов.</li>
-              <li>Доработал слой обработки, добавил фильтры для бот-активности и вынес чтение источника, трансформации и историю задач в отдельные сервисы, чтобы пайплайн было проще развивать и тестировать.</li>
-              <li>Подготовил два сценария запуска локально через Docker Compose и&nbsp;в&nbsp;Kubernetes через Dockerfile, spark-submit job и&nbsp;набор манифестов для&nbsp;Minikube.</li>
-            </ol>
-            <a class="project-link" href="https://github.com/tadzhnahal/etl-ecommerce-clickstream" target="_blank" rel="noreferrer">github.com/tadzhnahal/etl-ecommerce-clickstream</a>
-          </div>
-
-          <div class="card project-item">
-            <div class="item-head">
-              <h3 class="item-title">Reliability Lab</h3>
-            </div>
-            <p class="item-sub">python · bash · docker · linux · systemd</p>
-            <p class="project-intro">Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.</p>
-            <ol>
-              <li>Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.</li>
-              <li>Оформил отдельный сценарий со сбоем systemd, чтобы разбирать отказ сервиса, читать логи, находить причину поломки и вручную восстанавливать работу приложения.</li>
-              <li>Разложил проект по слоям `app`, `config`, `infra/docker`, `labs/linux/systemd-failure` и `scripts`, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.</li>
-            </ol>
-            <p class="project-status">Продолжаю работу над проектом и постепенно добавляю новые сценарии, чтобы собрать из него цельную учебную среду по Linux, сетям, контейнерам, мониторингу и разбору инцидентов.</p>
-            <a class="project-link" href="https://github.com/tadzhnahal/reliability-lab" target="_blank" rel="noreferrer">github.com/tadzhnahal/reliability-lab</a>
-          </div>
-
-          <div class="card project-item">
-            <div class="item-head">
-              <h3 class="item-title">Analytics Impact Map</h3>
-            </div>
-            <p class="item-sub">python · streamlit · postgresql · docker compose</p>
-            <p class="project-intro">Собираю сервис, который помогает визуализировать жизненный цикл данных и управлять связями между компонентами через backend, frontend и PostgreSQL-схему.</p>
-            <ol>
-              <li>Реализовал логику анализа зависимостей и подготовку графовых данных, чтобы показывать прямые связи между узлами и запускать разбор влияния изменений из интерфейса.</li>
-              <li>Доработал интерфейс на Streamlit, добавил графовое представление, подсветку затронутых узлов, формы для создания и удаления компонентов и зависимостей, а также перенес управление и анализ в сайдбар.</li>
-              <li>Настроил локальный запуск через Docker Compose и связал frontend, backend и базу, чтобы сервис было проще поднимать и проверять после каждой новой доработки.</li>
-            </ol>
-            <p class="project-status">Продолжаю работу над проектом и развиваю интерфейс и CRUD-сценарии, чтобы карта стала удобнее для реального разбора изменений в данных и сервисах.</p>
-            <a class="project-link" href="https://github.com/tadzhnahal/analytics-impact-map" target="_blank" rel="noreferrer">github.com/tadzhnahal/analytics-impact-map</a>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2 class="section-title">Опыт</h2>
-
-          <div class="card exp-item">
-            <div class="item-head">
-              <h3 class="item-title">Eduson.tv · Аналитик-методолог</h3>
-              <p class="item-meta">июль 2024 — ноябрь 2025</p>
-            </div>
-            <p class="item-sub">EdTech · продуктовые исследования, метрики, разработка IT-курсов</p>
-            <ul>
-              <li>Разработал 150+ часов IT-контента по Python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.</li>
-              <li>Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все программы кластера.</li>
-              <li>Переработал 85% контента бесплатного курса по Python по результатам A/B-тестов и анализа конверсии. Курс принес 450&nbsp;000&nbsp;руб. через неделю после запуска.</li>
-              <li>Провел 7+ продуктовых исследований новых направлений и помог запустить разработку двух курсов, которые в течение двух недель после запуска сделали более 400% плана по месячной выручке.</li>
-              <li>Проанализировал процессы поддержки, выявил ключевые узкие места и ускорил среднее время ответа на вопрос студента на 60%, а также разработал фреймворк, который помог сократить расходы на разработку контента на 42%.</li>
-              <li>Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, один из которых стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.</li>
-            </ul>
-          </div>
-
-          <div class="card exp-item">
-            <div class="item-head">
-              <h3 class="item-title">ООО «Учет и Налоги» · Младший аналитик данных</h3>
-              <p class="item-meta">январь 2024 — июль 2024</p>
-            </div>
-            <p class="item-sub">Финансовый аутсорсинг · 1С, Excel, ЭДО и управленческая отчетность</p>
-            <ul>
-              <li>Собрал единый реестр по 30 клиентам и связал в нем услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Руководитель стал быстрее видеть долги, просрочки и клиентов с риском ухода, а команда сократила время на поиск данных на 30%.</li>
-              <li>Составил пакет sql-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.</li>
-              <li>Нашел дубли, пустые поля и ошибки в клиентских карточках и реестрах. Бухгалтеры стали тратить на ручные сверки на 6 часов в неделю меньше и успевали вести больше клиентских задач без потери качества.</li>
-              <li>Составил управленческий отчёт для руководителя по срокам сдачи и статусам отправки отчетности. Команда стала раньше замечать риск срыва срока, а число срочных задач в конце месяца снизилось на 20%.</li>
-            </ul>
-          </div>
-        </section>
-      </section>
-    </main>
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="lang_russian">Русский</h3>
+          <p class="item-meta" data-i18n="lang_native">родной</p>
+        </div>
+      </div>
+    </section>
 
     <div class="footer-line"></div>
   </article>
 
   <script>
     (function () {
-      const selectors = ['.summary', '.small', '.item-sub', 'li', '.project-intro', '.project-status'];
-      const shortWords = [
-        'а', 'и', 'в', 'во', 'к', 'ко', 'с', 'со', 'у',
-        'о', 'об', 'обо', 'по', 'за', 'из', 'от', 'до',
-        'на', 'но', 'не', 'для', 'при', 'под', 'над', 'без'
-      ];
+      const pdfFiles = {
+        ru: 'Vladislav_Smirnov_CV.pdf',
+        en: 'Vladislav_Smirnov_CV_EN.pdf'
+      };
 
-      const re = new RegExp(
-        `(^|[\\s\\u00A0(«"])(${shortWords.join('|')})(\\s+)`,
-        'gmi'
-      );
+      const translations = {
+        ru: {
+          document_title: 'Vladislav Smirnov — CV',
+          name: 'Владислав Смирнов',
+          role: 'Data Engineering Intern',
+          btn_download: 'Скачать CV в PDF',
+          summary: 'Студент магистратуры ФКН ВШЭ по Data Science с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами, практиками DevOps и SRE. Больше всего мне интересно разбираться, как data-системы устроены «под капотом», и учиться делать их устойчивыми и надёжными.',
+          sec_projects: 'Проекты',
+          project_etl_intro: 'Собрал ETL-пайплайн для данных интернет-магазина и выстроил полный маршрут данных от источника до аналитической витрины. Проект загружает данные в PostgreSQL, читает их с помощью onETL и Spark, обрабатывает в Spark и записывает результат в ClickHouse.',
+          project_etl_b1: 'Разделил пайплайн на полный и инкрементальный проход, вынес оба режима в отдельные Spark job и добавил HWM в YAML-файл. Это позволило отдельно запускать первый full snapshot, повторно прогонять весь набор данных и обрабатывать только новые данные после последней метки.',
+          project_etl_b2: 'Собрал единые настройки сервиса через `config.yaml`, `.env`, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.',
+          project_etl_b3: 'Поднял HTTP API на FastAPI и фоновые задачи на Celery с Redis. Через API можно запускать full и incremental ETL, смотреть статус конкретной задачи и хранить историю последних прогонов.',
+          project_etl_b4: 'Доработал слой обработки, добавил фильтры для бот-активности и вынес чтение источника, трансформации и историю задач в отдельные сервисы, чтобы пайплайн было проще развивать и тестировать.',
+          project_etl_b5: 'Подготовил два сценария запуска локально через Docker Compose и в Kubernetes через Dockerfile, spark-submit job и набор манифестов для Minikube.',
+          project_rel_intro: 'Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.',
+          project_rel_b1: 'Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.',
+          project_rel_b2: 'Оформил отдельный сценарий со сбоем systemd, чтобы разбирать отказ сервиса, читать логи, находить причину поломки и вручную восстанавливать работу приложения.',
+          project_rel_b3: 'Разложил проект по слоям `app`, `config`, `infra/docker`, `labs/linux/systemd-failure` и `scripts`, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.',
+          project_rel_status: 'Продолжаю работу над проектом и постепенно добавляю новые сценарии, чтобы собрать из него цельную учебную среду по Linux, сетям, контейнерам, мониторингу и разбору инцидентов.',
+          project_map_intro: 'Собираю сервис, который помогает визуализировать жизненный цикл данных и управлять связями между компонентами через backend, frontend и PostgreSQL-схему.',
+          project_map_b1: 'Реализовал логику анализа зависимостей и подготовку графовых данных, чтобы показывать прямые связи между узлами и запускать разбор влияния изменений из интерфейса.',
+          project_map_b2: 'Доработал интерфейс на Streamlit, добавил графовое представление, подсветку затронутых узлов, формы для создания и удаления компонентов и зависимостей, а также перенес управление и анализ в сайдбар.',
+          project_map_b3: 'Настроил локальный запуск через Docker Compose и связал frontend, backend и базу, чтобы сервис было проще поднимать и проверять после каждой новой доработки.',
+          project_map_status: 'Продолжаю работу над проектом и развиваю интерфейс и CRUD-сценарии, чтобы карта стала удобнее для реального разбора изменений в данных и сервисах.',
+          sec_experience: 'Опыт',
+          exp_eduson_title: 'Eduson.tv · Аналитик-методолог',
+          exp_eduson_meta: 'июль 2024 — ноябрь 2025',
+          exp_eduson_sub: 'EdTech · продуктовые исследования, метрики и разработка IT-курсов',
+          exp_eduson_b1: 'Разработал 150+ часов IT-контента по Python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.',
+          exp_eduson_b2: 'Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все программы кластера.',
+          exp_eduson_b3: 'Переработал 85% контента бесплатного курса по Python по результатам A/B-тестов и анализа конверсии. Курс принес 450 000 руб. через неделю после запуска.',
+          exp_eduson_b4: 'Провел 7+ продуктовых исследований новых направлений и помог запустить разработку двух курсов, которые в течение двух недель после запуска сделали более 400% плана по месячной выручке.',
+          exp_eduson_b5: 'Проанализировал процессы поддержки, выявил ключевые узкие места и ускорил среднее время ответа на вопрос студента на 60%, а также разработал фреймворк, который помог сократить расходы на разработку контента на 42%.',
+          exp_eduson_b6: 'Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, один из которых стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.',
+          exp_uin_title: 'ООО «Учет и Налоги» · Младший аналитик данных',
+          exp_uin_meta: 'январь 2024 — июль 2024',
+          exp_uin_sub: 'Финансовый аутсорсинг · 1С, Excel, ЭДО и управленческая отчетность',
+          exp_uin_b1: 'Собрал единый реестр по 30 клиентам и связал в нем услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Руководитель стал быстрее видеть долги, просрочки и клиентов с риском ухода, а команда сократила время на поиск данных на 30%.',
+          exp_uin_b2: 'Составил пакет sql-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.',
+          exp_uin_b3: 'Нашел дубли, пустые поля и ошибки в клиентских карточках и реестрах. Бухгалтеры стали тратить на ручные сверки на 6 часов в неделю меньше и успевали вести больше клиентских задач без потери качества.',
+          exp_uin_b4: 'Составил управленческий отчёт для руководителя по срокам сдачи и статусам отправки отчетности. Команда стала раньше замечать риск срыва срока, а число срочных задач в конце месяца снизилось на 20%.',
+          sec_education: 'Образование',
+          edu_hse_title: 'НИУ ВШЭ',
+          edu_hse_sub: 'Магистратура, прикладная математика и информатика',
+          edu_spbgu_title: 'СПбГУ',
+          edu_spbgu_sub: 'Магистратура, медиакоммуникации',
+          edu_vgu_title: 'ВГУ',
+          edu_vgu_sub: 'Бакалавриат, журналистика',
+          sec_extra: 'Доп. образование',
+          extra_meta_present: '2026 — н.в.',
+          extra_meta_present_2: '2026 — н.в.',
+          extra_meta_present_3: '2026 — н.в.',
+          extra_analytics_title: 'VK Education · Прикладная аналитика данных',
+          extra_analytics_text: 'Разбираю Big Data, ETL, Data Quality, BI-системы, SQL, Python, скоринг, приоритизацию задач и работу с гипотезами. Курс помогает лучше понимать, как данные проходят путь от источника до решения в продукте.',
+          extra_devops_title: 'VK Education · DevOps/SRE-инженер',
+          extra_devops_text: 'Изучаю Linux, сети, веб-архитектуру, Docker, Kubernetes, мониторинг сервисов и типовые сбои в инфраструктуре. Курс помогает лучше понимать инфраструктуру прода, увереннее диагностировать сбои и точнее работать с надежностью сервисов.',
+          extra_dist_title: 'VK Education · Распределенные вычисления',
+          extra_dist_text: 'Изучаю сетевые протоколы, оптимизацию запросов, шардирование и репликацию. Дальше буду изучать NoSQL, Apache Kafka, SRE, observability и нагрузочное тестирование. Курс помогает лучше понимать, как работают высоконагруженные системы и как делать их устойчивыми.',
+          sec_tools: 'Инструменты',
+          tool_product_analytics: 'продуктовая аналитика',
+          tool_product_research: 'продуктовые исследования',
+          sec_languages: 'Языки',
+          lang_english: 'English',
+          lang_russian: 'Русский',
+          lang_native: 'родной'
+        },
+        en: {
+          document_title: 'Vlad Smirnov — CV',
+          name: 'Vlad Smirnov',
+          role: 'Data Engineering Intern',
+          btn_download: 'Download CV as PDF',
+          summary: 'Master’s student in Data Science at HSE FCS with experience in analytics across accounting outsourcing and online education. Currently focused on data engineering, ETL pipelines, distributed data processing, backend services, DevOps, and SRE practices. Particularly interested in understanding how data systems work under the hood and how to make them robust and reliable.',
+          sec_projects: 'Projects',
+          project_etl_intro: 'Built an ETL pipeline for e-commerce data and designed a full path from source systems to an analytical layer. The project loads data into PostgreSQL, reads it with onETL and Spark, processes it in Spark, and writes the result to ClickHouse.',
+          project_etl_b1: 'Split the pipeline into full and incremental modes, moved both flows into separate Spark jobs, and added HWM tracking in a YAML file. This made it possible to run the first full snapshot separately, rerun the entire dataset, and process only new data after the latest checkpoint.',
+          project_etl_b2: 'Set up unified service configuration through `config.yaml`, `.env`, ConfigMap, and Secret so the same service can run locally and in Kubernetes without manual parameter changes before each launch.',
+          project_etl_b3: 'Built an HTTP API with FastAPI and background tasks with Celery and Redis. The API makes it possible to trigger full and incremental ETL runs, check the status of a specific task, and keep a history of recent runs.',
+          project_etl_b4: 'Improved the processing layer, added bot-activity filters, and moved source reading, transformations, and task history into separate services to make the pipeline easier to extend and test.',
+          project_etl_b5: 'Prepared two launch scenarios, one locally through Docker Compose and one in Kubernetes through Dockerfile, a spark-submit job, and a set of manifests for Minikube.',
+          project_rel_intro: 'Building an educational lab around a small service to study application operations, typical failures, and core SRE scenarios in one place.',
+          project_rel_b1: 'Added a Docker environment for local startup, moved infrastructure files into separate directories, and prepared a lab that can be launched quickly and reproduced repeatedly.',
+          project_rel_b2: 'Designed a dedicated systemd failure scenario to investigate service downtime, read logs, find the root cause, and recover the application manually.',
+          project_rel_b3: 'Organized the project into `app`, `config`, `infra/docker`, `labs/linux/systemd-failure`, and `scripts` layers to separate service code, configuration, infrastructure, and scenarios.',
+          project_rel_status: 'I continue to develop the project and gradually add new scenarios to turn it into a complete educational environment for Linux, networking, containers, monitoring, and incident analysis.',
+          project_map_intro: 'Building a service that helps visualize the data lifecycle and manage relationships between components through a backend, frontend, and PostgreSQL schema.',
+          project_map_b1: 'Implemented dependency analysis logic and graph data preparation so the interface can show direct links between nodes and launch impact analysis for changes.',
+          project_map_b2: 'Improved the Streamlit interface, added a graph view, highlighting for affected nodes, forms for creating and deleting components and dependencies, and moved controls and analysis into the sidebar.',
+          project_map_b3: 'Set up local startup through Docker Compose and connected the frontend, backend, and database so the service is easier to run and verify after each new iteration.',
+          project_map_status: 'I continue to develop the project and improve the interface and CRUD scenarios so the map becomes more useful for real change analysis in data and services.',
+          sec_experience: 'Experience',
+          exp_eduson_title: 'Eduson.tv · Analyst-Methodologist',
+          exp_eduson_meta: 'July 2024 — November 2025',
+          exp_eduson_sub: 'EdTech · product research, metrics, and IT course development',
+          exp_eduson_b1: 'Developed 150+ hours of IT content in Python, web development, test automation, and IT project management. Over the year, the cluster expanded its product portfolio by 28% and doubled revenue.',
+          exp_eduson_b2: 'Ran 15+ filming sessions with experts from Yandex, Sber, Amazon, Booking.com, and EPAM. The materials became part of all cluster programs.',
+          exp_eduson_b3: 'Reworked 85% of the free Python course content based on A/B tests and conversion analysis. The course generated 450,000 rubles within a week after launch.',
+          exp_eduson_b4: 'Conducted 7+ product studies of new directions and helped launch the development of two courses that exceeded 400% of the monthly revenue target within two weeks after launch.',
+          exp_eduson_b5: 'Analyzed support processes, identified key bottlenecks, reduced the average response time to student questions by 60%, and developed a framework that helped cut content development costs by 42%.',
+          exp_eduson_b6: 'Refined and launched capstone projects for web development, test automation, and strategic IT management courses, one of which became one of the cluster’s flagship products by revenue with an average student rating of 4.6/5.',
+          exp_uin_title: 'Accounting and Taxes LLC · Junior Data Analyst',
+          exp_uin_meta: 'January 2024 — July 2024',
+          exp_uin_sub: 'Financial outsourcing · 1C, Excel, EDI, and management reporting',
+          exp_uin_b1: 'Built a unified register for 30 clients and connected services, payments, documents, and reporting statuses from 1C, Excel, and EDI. This helped the manager see debts, delays, and at-risk clients faster, while the team reduced data search time by 30%.',
+          exp_uin_b2: 'Prepared a package of SQL queries with joins, group by, case when, and subqueries to reconcile payments, services, and reporting periods. The team found unpaid invoices worth 60–90 thousand rubles per quarter faster, while overdue receivables in the work area decreased by 12–15%.',
+          exp_uin_b3: 'Found duplicates, empty fields, and errors in client cards and registers. Accountants reduced manual reconciliation work by 6 hours per week and handled more client tasks without losing quality.',
+          exp_uin_b4: 'Prepared a management report on reporting deadlines and submission statuses. The team started spotting deadline risks earlier, and the number of urgent end-of-month tasks dropped by 20%.',
+          sec_education: 'Education',
+          edu_hse_title: 'HSE University',
+          edu_hse_sub: 'Master’s degree, Applied Mathematics and Computer Science',
+          edu_spbgu_title: 'Saint Petersburg State University',
+          edu_spbgu_sub: 'Master’s degree, Media Communications',
+          edu_vgu_title: 'Voronezh State University',
+          edu_vgu_sub: 'Bachelor’s degree, Journalism',
+          sec_extra: 'Additional Education',
+          extra_meta_present: '2026 — present',
+          extra_meta_present_2: '2026 — present',
+          extra_meta_present_3: '2026 — present',
+          extra_analytics_title: 'VK Education · Applied Data Analytics',
+          extra_analytics_text: 'Studying Big Data, ETL, Data Quality, BI systems, SQL, Python, scoring, prioritization, and hypothesis work. The course helps me better understand how data moves from a source to a product decision.',
+          extra_devops_title: 'VK Education · DevOps/SRE Engineer',
+          extra_devops_text: 'Studying Linux, networks, web architecture, Docker, Kubernetes, service monitoring, and typical infrastructure failures. The course helps me better understand production infrastructure, diagnose failures more confidently, and work with service reliability more accurately.',
+          extra_dist_title: 'VK Education · Distributed Computing',
+          extra_dist_text: 'Studying network protocols, query optimization, sharding, and replication. Next, I will study NoSQL, Apache Kafka, SRE, observability, and load testing. The course helps me better understand how high-load systems work and how to make them resilient.',
+          sec_tools: 'Tools',
+          tool_product_analytics: 'product analytics',
+          tool_product_research: 'product research',
+          sec_languages: 'Languages',
+          lang_english: 'English',
+          lang_russian: 'Russian',
+          lang_native: 'native'
+        }
+      };
 
-      function fixText(text) {
-        return text.replace(re, (match, before, word) => {
-          return `${before}${word}\u00A0`;
+      const selectorsForTypography = ['.summary', '.small', '.item-sub', 'li', '.project-intro', '.project-status'];
+
+      function applyRuTypography() {
+        const shortWords = [
+          'а', 'и', 'в', 'во', 'к', 'ко', 'с', 'со', 'у',
+          'о', 'об', 'обо', 'по', 'за', 'из', 'от', 'до',
+          'на', 'но', 'не', 'для', 'при', 'под', 'над', 'без'
+        ];
+
+        const re = new RegExp(`(^|[\\s\\u00A0(«"])(${shortWords.join('|')})(\\s+)`, 'gmi');
+
+        function fixText(text) {
+          return text.replace(re, (match, before, word) => `${before}${word}\u00A0`);
+        }
+
+        function walk(node) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.nodeValue = fixText(node.nodeValue);
+            return;
+          }
+
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            if (['SCRIPT', 'STYLE', 'A', 'BUTTON'].includes(node.tagName)) return;
+            node.childNodes.forEach(walk);
+          }
+        }
+
+        document.querySelectorAll(selectorsForTypography.join(', ')).forEach(walk);
+      }
+
+      function setLanguage(lang) {
+        const dict = translations[lang];
+        document.documentElement.lang = lang;
+        document.title = dict.document_title;
+
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key] !== undefined) {
+            el.textContent = dict[key];
+          }
         });
+
+        const downloadBtn = document.getElementById('downloadBtn');
+        downloadBtn.textContent = dict.btn_download;
+        downloadBtn.href = pdfFiles[lang];
+        downloadBtn.setAttribute('download', pdfFiles[lang]);
+
+        const langToggle = document.getElementById('langToggle');
+        langToggle.textContent = lang === 'ru' ? 'English' : 'Русский';
+
+        if (lang === 'ru') {
+          applyRuTypography();
+        }
       }
 
-      function walk(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-          node.nodeValue = fixText(node.nodeValue);
-          return;
-        }
+      const langToggle = document.getElementById('langToggle');
+      langToggle.addEventListener('click', function () {
+        const nextLang = document.documentElement.lang === 'ru' ? 'en' : 'ru';
+        setLanguage(nextLang);
+      });
 
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          if (['SCRIPT', 'STYLE', 'A'].includes(node.tagName)) return;
-          node.childNodes.forEach(walk);
-        }
-      }
-
-      document.querySelectorAll(selectors.join(', ')).forEach(walk);
+      setLanguage('ru');
     })();
   </script>
 </body>
