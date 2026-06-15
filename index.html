@@ -357,7 +357,7 @@
     </div>
 
     <p class="summary" data-i18n="summary">
-      Студент магистратуры ФКН ВШЭ по Data Science с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами, практиками DevOps и SRE. Больше всего мне интересно разбираться, как data-системы работают «под капотом», и учиться делать их устойчивыми и надёжными.
+      Студент магистратуры ФКН ВШЭ по Data Science с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами, практиками DevOps и SRE. Больше всего мне интересно разбираться, как data-системы работают под капотом, и учиться делать их устойчивыми и надёжными.
     </p>
 
     <section class="section">
@@ -367,46 +367,77 @@
         <div class="item-head">
           <h3 class="item-title">ETL E-commerce Clickstream</h3>
         </div>
-        <p class="item-sub">python · postgresql · clickhouse · apache spark · onetl · fastapi · celery · redis · docker · kubernetes</p>
+        <p class="item-sub" data-i18n="project_etl_stack">Стек: Python, PostgreSQL, ClickHouse, onETL, PySpark, FastAPI, Celery, Redis, Docker, Kubernetes</p>
         <p class="project-intro" data-i18n="project_etl_intro">Собрал ETL-пайплайн для данных интернет-магазина и выстроил полный маршрут данных от источника до аналитической витрины. Проект загружает данные в PostgreSQL, читает их с помощью onETL и Spark, обрабатывает в Spark и записывает результат в ClickHouse.</p>
         <ol>
           <li data-i18n="project_etl_b1">Разделил пайплайн на полный и инкрементальный проход, вынес оба режима в отдельные Spark job и добавил HWM в YAML-файл. Это позволило отдельно запускать первый full snapshot, повторно прогонять весь набор данных и обрабатывать только новые данные после последней метки.</li>
-          <li data-i18n="project_etl_b2">Собрал единые настройки сервиса через `config.yaml`, `.env`, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.</li>
+          <li data-i18n="project_etl_b2">Собрал единые настройки сервиса через config.yaml, .env, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.</li>
           <li data-i18n="project_etl_b3">Поднял HTTP API на FastAPI и фоновые задачи на Celery с Redis. Через API можно запускать full и incremental ETL, смотреть статус конкретной задачи и хранить историю последних прогонов.</li>
           <li data-i18n="project_etl_b4">Доработал слой обработки, добавил фильтры для бот-активности и вынес чтение источника, трансформации и историю задач в отдельные сервисы, чтобы пайплайн было проще развивать и тестировать.</li>
           <li data-i18n="project_etl_b5">Подготовил два сценария запуска локально через Docker Compose и в Kubernetes через Dockerfile, spark-submit job и набор манифестов для Minikube.</li>
         </ol>
+        <p class="project-status" data-i18n="project_etl_status">По итогам проекта мне стало понятнее, как собирать ETL-сервис с двумя режимами загрузки, держать конфигурацию в одном месте и отдельно выстраивать локальный и Kubernetes-сценарии запуска.</p>
         <a class="project-link" href="https://github.com/tadzhnahal/etl-ecommerce-clickstream" target="_blank" rel="noreferrer">github.com/tadzhnahal/etl-ecommerce-clickstream</a>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title">Data Vault Posts Loader</h3>
+        </div>
+        <p class="item-sub" data-i18n="project_gazprom_stack">Стек: Python, PostgreSQL, Docker Compose, Data Vault 2.0</p>
+        <p class="project-intro" data-i18n="project_gazprom_intro">Собрал ELT-проект, который забирает данные из REST API, загружает их в слой STG в PostgreSQL и перекладывает в DDS по модели Data Vault 2.0.</p>
+        <ol>
+          <li data-i18n="project_gazprom_b1">Поднял локальный PostgreSQL через Docker Compose, подготовил схемы и таблицы для слоев STG и DDS и настроил окружение для локального запуска.</li>
+          <li data-i18n="project_gazprom_b2">Написал два Python-скрипта: первый загружает свежий снимок данных из REST API в STG, второй переносит строки в DDS и считает hash key для hub, link и satellite-таблиц.</li>
+          <li data-i18n="project_gazprom_b3">Разложил данные по модели Data Vault 2.0 так, чтобы бизнес-ключи, связи и описательные атрибуты лежали отдельно, а повторная загрузка не дублировала одинаковые версии деталей поста.</li>
+        </ol>
+        <p class="project-status" data-i18n="project_gazprom_status">В ходе проекта мне стало понятнее, как разделять слои STG и DDS, зачем выносить бизнес-ключи и связи в отдельные сущности и как выглядит простая загрузка в Data Vault 2.0.</p>
+        <a class="project-link" href="https://github.com/tadzhnahal/gazprom-data-vault-posts-task" target="_blank" rel="noreferrer">github.com/tadzhnahal/gazprom-data-vault-posts-task</a>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title">Flights DWH</h3>
+        </div>
+        <p class="item-sub" data-i18n="project_flights_stack">Стек: Python, PostgreSQL, Apache Airflow, S3, Jupyter</p>
+        <p class="project-intro" data-i18n="project_flights_intro">Собрал первую часть проекта по хранилищу данных для рейсов, где STG-слой принимает исходные файлы, приводит поля к единому виду и загружает данные в PostgreSQL.</p>
+        <ol>
+          <li data-i18n="project_flights_b1">Настроил загрузку данных о рейсах из S3 и справочника аэропортов из отдельного файла, чтобы следующий слой хранилища работал уже с данными в PostgreSQL, а не с сырыми источниками.</li>
+          <li data-i18n="project_flights_b2">Собрал Airflow DAG для запуска загрузки и общего прохода пайплайна, чтобы запуск и порядок шагов были собраны в одном оркестраторе.</li>
+          <li data-i18n="project_flights_b3">Проверил результат через SQL и Jupyter, чтобы убедиться, что данные корректно попадают в STG и подходят для следующих слоев хранилища.</li>
+        </ol>
+        <p class="project-status" data-i18n="project_flights_status">Этот проект помог мне лучше понять роль первого слоя хранилища, связь между загрузкой источников и оркестрацией в Airflow и то, как подготавливают базу для следующих слоев DWH.</p>
+        <a class="project-link" href="https://github.com/tadzhnahal/flights-dwh" target="_blank" rel="noreferrer">github.com/tadzhnahal/flights-dwh</a>
+      </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title">HTTP Status Checker Automation</h3>
+        </div>
+        <p class="item-sub" data-i18n="project_yadro_stack">Стек: Python, Docker, Ansible, Linux</p>
+        <p class="project-intro" data-i18n="project_yadro_intro">Собрал небольшой инфраструктурный проект для автоматизации HTTP-проверок, который включает Python-скрипт, Docker-образ и сценарий запуска через Ansible.</p>
+        <ol>
+          <li data-i18n="project_yadro_b1">Написал Python-скрипт, который отправляет запросы к сервису с разными статус-кодами, пишет ответы в лог и не останавливает весь проход, если один из запросов завершается ошибкой.</li>
+          <li data-i18n="project_yadro_b2">Собрал Docker-образ с Python и зависимостями, чтобы скрипт запускался в контейнере без ручной подготовки окружения на хосте.</li>
+          <li data-i18n="project_yadro_b3">Написал Ansible playbook, который готовит Docker, собирает образ, запускает контейнер и проверяет результат по логам.</li>
+        </ol>
+        <p class="project-status" data-i18n="project_yadro_status">После проекта мне стало понятнее, как собирать небольшой инфраструктурный сценарий целиком: от Python-скрипта до контейнера и автоматизированного запуска через Ansible.</p>
+        <a class="project-link" href="https://github.com/tadzhnahal/yadro-infra-platform-task" target="_blank" rel="noreferrer">github.com/tadzhnahal/yadro-infra-platform-task</a>
       </div>
 
       <div class="block">
         <div class="item-head">
           <h3 class="item-title">Reliability Lab</h3>
         </div>
-        <p class="item-sub">python · bash · docker · linux · systemd</p>
+        <p class="item-sub" data-i18n="project_rel_stack">Стек: Python, Bash, Docker, Linux, systemd</p>
         <p class="project-intro" data-i18n="project_rel_intro">Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.</p>
         <ol>
           <li data-i18n="project_rel_b1">Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.</li>
           <li data-i18n="project_rel_b2">Оформил отдельный сценарий со сбоем systemd, чтобы разбирать отказ сервиса, читать логи, находить причину поломки и вручную восстанавливать работу приложения.</li>
-          <li data-i18n="project_rel_b3">Разложил проект по слоям `app`, `config`, `infra/docker`, `labs/linux/systemd-failure` и `scripts`, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.</li>
+          <li data-i18n="project_rel_b3">Разложил проект по слоям app, config, infra/docker, labs/linux/systemd-failure и scripts, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.</li>
         </ol>
-        <p class="project-status" data-i18n="project_rel_status">Продолжаю работу над проектом и постепенно добавляю новые сценарии, чтобы собрать из него цельную учебную среду по Linux, сетям, контейнерам, мониторингу и разбору инцидентов.</p>
+        <p class="project-status" data-i18n="project_rel_status">Проект помогает мне лучше понимать, как воспроизводить сбой сервиса, шаг за шагом разбирать отказ systemd и собирать простой учебный стенд вокруг инфраструктурного сценария. Продолжаю работу над проектом и постепенно добавляю новые сценарии.</p>
         <a class="project-link" href="https://github.com/tadzhnahal/reliability-lab" target="_blank" rel="noreferrer">github.com/tadzhnahal/reliability-lab</a>
-      </div>
-
-      <div class="block">
-        <div class="item-head">
-          <h3 class="item-title">Analytics Impact Map</h3>
-        </div>
-        <p class="item-sub">python · streamlit · postgresql · docker compose</p>
-        <p class="project-intro" data-i18n="project_map_intro">Собираю сервис, который помогает визуализировать жизненный цикл данных и управлять связями между компонентами через backend, frontend и PostgreSQL-схему.</p>
-        <ol>
-          <li data-i18n="project_map_b1">Реализовал логику анализа зависимостей и подготовку графовых данных, чтобы показывать прямые связи между узлами и запускать разбор влияния изменений из интерфейса.</li>
-          <li data-i18n="project_map_b2">Доработал интерфейс на Streamlit, добавил графовое представление, подсветку затронутых узлов, формы для создания и удаления компонентов и зависимостей, а также перенес управление и анализ в сайдбар.</li>
-          <li data-i18n="project_map_b3">Настроил локальный запуск через Docker Compose и связал frontend, backend и базу, чтобы сервис было проще поднимать и проверять после каждой новой доработки.</li>
-        </ol>
-        <p class="project-status" data-i18n="project_map_status">Продолжаю работу над проектом и развиваю интерфейс и CRUD-сценарии, чтобы карта стала удобнее для реального разбора изменений в данных и сервисах.</p>
-        <a class="project-link" href="https://github.com/tadzhnahal/analytics-impact-map" target="_blank" rel="noreferrer">github.com/tadzhnahal/analytics-impact-map</a>
       </div>
     </section>
 
@@ -418,14 +449,14 @@
           <h3 class="item-title" data-i18n="exp_eduson_title">Eduson.tv · Аналитик-методолог</h3>
           <p class="item-meta" data-i18n="exp_eduson_meta">июль 2024 — ноябрь 2025</p>
         </div>
-        <p class="item-sub" data-i18n="exp_eduson_sub">EdTech · продуктовые исследования, метрики и разработка IT-курсов</p>
+        <p class="item-sub" data-i18n="exp_eduson_sub">Обязанности: продуктовые исследования, анализ метрик, разработка и доработка IT-курсов.</p>
         <ul>
           <li data-i18n="exp_eduson_b1">Разработал 150+ часов IT-контента по Python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.</li>
           <li data-i18n="exp_eduson_b2">Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все программы кластера.</li>
           <li data-i18n="exp_eduson_b3">Переработал 85% контента бесплатного курса по Python по результатам A/B-тестов и анализа конверсии. Курс принес около 450 тыс. руб. выручки через неделю после запуска.</li>
           <li data-i18n="exp_eduson_b4">Провел 7+ продуктовых исследований новых направлений и помог запустить разработку двух курсов, которые в течение двух недель после запуска сделали более 400% плана по месячной выручке.</li>
-          <li data-i18n="exp_eduson_b5">Проанализировал процессы поддержки, выявил ключевые узкие места и разработал фреймворк, который ускорил среднее время ответа на вопрос студента на 60% и сократил расходы на разработку контента на 42%</li>
-          <li data-i18n="exp_eduson_b6">Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, который стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.</li>
+          <li data-i18n="exp_eduson_b5">Проанализировал процессы поддержки, выявил ключевые узкие места и разработал фреймворк, который ускорил среднее время ответа на вопрос студента на 60% и сократил расходы на разработку контента на 42%.</li>
+          <li data-i18n="exp_eduson_b6">Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, один из которых стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.</li>
         </ul>
       </div>
 
@@ -434,10 +465,10 @@
           <h3 class="item-title" data-i18n="exp_uin_title">ООО «Учет и Налоги» · Младший аналитик данных</h3>
           <p class="item-meta" data-i18n="exp_uin_meta">январь 2024 — июль 2024</p>
         </div>
-        <p class="item-sub" data-i18n="exp_uin_sub">Финансовый аутсорсинг · 1С, Excel, ЭДО и управленческая отчетность</p>
+        <p class="item-sub" data-i18n="exp_uin_sub">Обязанности: сверка данных, сбор реестров, проверка клиентских карточек и подготовка управленческой отчетности.</p>
         <ul>
           <li data-i18n="exp_uin_b1">Собрал единый реестр по 30 клиентам и связал в нем услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Руководитель стал быстрее видеть долги, просрочки и клиентов с риском ухода, а команда сократила время на поиск данных на 30%.</li>
-          <li data-i18n="exp_uin_b2">Составил пакет sql-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.</li>
+          <li data-i18n="exp_uin_b2">Составил пакет SQL-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.</li>
           <li data-i18n="exp_uin_b3">Нашел дубли, пустые поля и ошибки в клиентских карточках и реестрах. Бухгалтеры стали тратить на ручные сверки на 6 часов в неделю меньше и успевали вести больше клиентских задач без потери качества.</li>
           <li data-i18n="exp_uin_b4">Составил управленческий отчёт для руководителя по срокам сдачи и статусам отправки отчетности. Команда стала раньше замечать риск срыва срока, а число срочных задач в конце месяца снизилось на 20%.</li>
         </ul>
@@ -498,6 +529,14 @@
         </div>
         <p class="small" data-i18n="extra_dist_text">Изучаю сетевые протоколы, оптимизацию запросов, шардирование и репликацию. Дальше буду изучать NoSQL, Apache Kafka, SRE, observability и нагрузочное тестирование. Курс помогает лучше понимать, как работают высоконагруженные системы и как делать их устойчивыми.</p>
       </div>
+
+      <div class="block">
+        <div class="item-head">
+          <h3 class="item-title" data-i18n="extra_greenatom_title">Гринатом · Облачные сервисы</h3>
+          <p class="item-meta" data-i18n="extra_meta_present_4">2026 — н.в.</p>
+        </div>
+        <p class="small" data-i18n="extra_greenatom_text">Изучаю облачные сервисы VK Cloud, где на практике работаю с сетями, виртуальными машинами, балансировщиком, Object Storage S3, Managed PostgreSQL, OpenStack и базовой автоматизацией. Программа помогает лучше понимать облачную инфраструктуру, сетевые сценарии и работу сервисов данных в облаке.</p>
+      </div>
     </section>
 
     <section class="section">
@@ -514,20 +553,20 @@
         <span class="chip">numpy</span>
         <span class="chip">matplotlib</span>
         <span class="chip">seaborn</span>
-        <span class="chip">apache spark</span>
         <span class="chip">pyspark</span>
+        <span class="chip">onetl</span>
         <span class="chip">apache airflow</span>
         <span class="chip">fastapi</span>
-        <span class="chip">streamlit</span>
         <span class="chip">celery</span>
         <span class="chip">redis</span>
-        <span class="chip">minio</span>
         <span class="chip">docker</span>
         <span class="chip">kubernetes</span>
+        <span class="chip">ansible</span>
+        <span class="chip">terraform</span>
+        <span class="chip">openstack</span>
+        <span class="chip">jupyter</span>
         <span class="chip">linux</span>
         <span class="chip">git</span>
-        <span class="chip" data-i18n="tool_product_analytics">продуктовая аналитика</span>
-        <span class="chip" data-i18n="tool_product_research">продуктовые исследования</span>
       </div>
     </section>
 
@@ -563,39 +602,55 @@
           name: 'Владислав Смирнов',
           role: 'Data Engineering Intern',
           btn_download: 'Скачать CV в PDF',
-          summary: 'Студент магистратуры ФКН ВШЭ по Data Science с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами, практиками DevOps и SRE. Больше всего мне интересно разбираться, как data-системы работают «под капотом», и учиться делать их устойчивыми и надёжными.',
+          summary: 'Студент магистратуры ФКН ВШЭ по Data Science с опытом аналитики в бухгалтерском аутсорсе и онлайн-образовании. Сейчас всё глубже двигаюсь в сторону data engineering и делаю проекты, связанные с ETL-пайплайнами, распределённой обработкой данных, backend-сервисами, практиками DevOps и SRE. Больше всего мне интересно разбираться, как data-системы работают под капотом, и учиться делать их устойчивыми и надёжными.',
           sec_projects: 'Проекты',
+          project_etl_stack: 'Стек: Python, PostgreSQL, ClickHouse, onETL, PySpark, FastAPI, Celery, Redis, Docker, Kubernetes',
           project_etl_intro: 'Собрал ETL-пайплайн для данных интернет-магазина и выстроил полный маршрут данных от источника до аналитической витрины. Проект загружает данные в PostgreSQL, читает их с помощью onETL и Spark, обрабатывает в Spark и записывает результат в ClickHouse.',
           project_etl_b1: 'Разделил пайплайн на полный и инкрементальный проход, вынес оба режима в отдельные Spark job и добавил HWM в YAML-файл. Это позволило отдельно запускать первый full snapshot, повторно прогонять весь набор данных и обрабатывать только новые данные после последней метки.',
-          project_etl_b2: 'Собрал единые настройки сервиса через `config.yaml`, `.env`, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.',
+          project_etl_b2: 'Собрал единые настройки сервиса через config.yaml, .env, ConfigMap и Secret, чтобы один и тот же сервис запускался локально и в Kubernetes без ручной правки параметров перед каждым стартом.',
           project_etl_b3: 'Поднял HTTP API на FastAPI и фоновые задачи на Celery с Redis. Через API можно запускать full и incremental ETL, смотреть статус конкретной задачи и хранить историю последних прогонов.',
           project_etl_b4: 'Доработал слой обработки, добавил фильтры для бот-активности и вынес чтение источника, трансформации и историю задач в отдельные сервисы, чтобы пайплайн было проще развивать и тестировать.',
           project_etl_b5: 'Подготовил два сценария запуска локально через Docker Compose и в Kubernetes через Dockerfile, spark-submit job и набор манифестов для Minikube.',
+          project_etl_status: 'По итогам проекта мне стало понятнее, как собирать ETL-сервис с двумя режимами загрузки, держать конфигурацию в одном месте и отдельно выстраивать локальный и Kubernetes-сценарии запуска.',
+          project_gazprom_stack: 'Стек: Python, PostgreSQL, Docker Compose, Data Vault 2.0',
+          project_gazprom_intro: 'Собрал ELT-проект, который забирает данные из REST API, загружает их в слой STG в PostgreSQL и перекладывает в DDS по модели Data Vault 2.0.',
+          project_gazprom_b1: 'Поднял локальный PostgreSQL через Docker Compose, подготовил схемы и таблицы для слоев STG и DDS и настроил окружение для локального запуска.',
+          project_gazprom_b2: 'Написал два Python-скрипта: первый загружает свежий снимок данных из REST API в STG, второй переносит строки в DDS и считает hash key для hub, link и satellite-таблиц.',
+          project_gazprom_b3: 'Разложил данные по модели Data Vault 2.0 так, чтобы бизнес-ключи, связи и описательные атрибуты лежали отдельно, а повторная загрузка не дублировала одинаковые версии деталей поста.',
+          project_gazprom_status: 'В ходе проекта мне стало понятнее, как разделять слои STG и DDS, зачем выносить бизнес-ключи и связи в отдельные сущности и как выглядит простая загрузка в Data Vault 2.0.',
+          project_flights_stack: 'Стек: Python, PostgreSQL, Apache Airflow, S3, Jupyter',
+          project_flights_intro: 'Собрал первую часть проекта по хранилищу данных для рейсов, где STG-слой принимает исходные файлы, приводит поля к единому виду и загружает данные в PostgreSQL.',
+          project_flights_b1: 'Настроил загрузку данных о рейсах из S3 и справочника аэропортов из отдельного файла, чтобы следующий слой хранилища работал уже с данными в PostgreSQL, а не с сырыми источниками.',
+          project_flights_b2: 'Собрал Airflow DAG для запуска загрузки и общего прохода пайплайна, чтобы запуск и порядок шагов были собраны в одном оркестраторе.',
+          project_flights_b3: 'Проверял результат через SQL и Jupyter, чтобы убедиться, что данные корректно попадают в STG и подходят для следующих слоев хранилища.',
+          project_flights_status: 'Этот проект помог мне лучше понять роль первого слоя хранилища, связь между загрузкой источников и оркестрацией в Airflow и то, как подготавливают базу для следующих слоев DWH.',
+          project_yadro_stack: 'Стек: Python, Docker, Ansible, Linux',
+          project_yadro_intro: 'Собрал небольшой инфраструктурный проект для автоматизации HTTP-проверок, который включает Python-скрипт, Docker-образ и сценарий запуска через Ansible.',
+          project_yadro_b1: 'Написал Python-скрипт, который отправляет запросы к сервису с разными статус-кодами, пишет ответы в лог и не останавливает весь проход, если один из запросов завершается ошибкой.',
+          project_yadro_b2: 'Собрал Docker-образ с Python и зависимостями, чтобы скрипт запускался в контейнере без ручной подготовки окружения на хосте.',
+          project_yadro_b3: 'Написал Ansible playbook, который готовит Docker, собирает образ, запускает контейнер и проверяет результат по логам.',
+          project_yadro_status: 'После проекта мне стало понятнее, как собирать небольшой инфраструктурный сценарий целиком — от Python-скрипта до контейнера и автоматизированного запуска через Ansible.',
+          project_rel_stack: 'Стек: Python, Bash, Docker, Linux, systemd',
           project_rel_intro: 'Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.',
           project_rel_b1: 'Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.',
           project_rel_b2: 'Оформил отдельный сценарий со сбоем systemd, чтобы разбирать отказ сервиса, читать логи, находить причину поломки и вручную восстанавливать работу приложения.',
-          project_rel_b3: 'Разложил проект по слоям `app`, `config`, `infra/docker`, `labs/linux/systemd-failure` и `scripts`, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.',
-          project_rel_status: 'Продолжаю работу над проектом и постепенно добавляю новые сценарии, чтобы собрать из него цельную учебную среду по Linux, сетям, контейнерам, мониторингу и разбору инцидентов.',
-          project_map_intro: 'Собираю сервис, который помогает визуализировать жизненный цикл данных и управлять связями между компонентами через backend, frontend и PostgreSQL-схему.',
-          project_map_b1: 'Реализовал логику анализа зависимостей и подготовку графовых данных, чтобы показывать прямые связи между узлами и запускать разбор влияния изменений из интерфейса.',
-          project_map_b2: 'Доработал интерфейс на Streamlit, добавил графовое представление, подсветку затронутых узлов, формы для создания и удаления компонентов и зависимостей, а также перенес управление и анализ в сайдбар.',
-          project_map_b3: 'Настроил локальный запуск через Docker Compose и связал frontend, backend и базу, чтобы сервис было проще поднимать и проверять после каждой новой доработки.',
-          project_map_status: 'Продолжаю работу над проектом и развиваю интерфейс и CRUD-сценарии, чтобы карта стала удобнее для реального разбора изменений в данных и сервисах.',
+          project_rel_b3: 'Разложил проект по слоям app, config, infra/docker, labs/linux/systemd-failure и scripts, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.',
+          project_rel_status: 'Проект помогает мне лучше понимать, как воспроизводить сбой сервиса, шаг за шагом разбирать отказ systemd и собирать простой учебный стенд вокруг инфраструктурного сценария. Продолжаю работу над проектом и постепенно добавляю новые сценарии.',
           sec_experience: 'Опыт',
           exp_eduson_title: 'Eduson.tv · Аналитик-методолог',
           exp_eduson_meta: 'июль 2024 — ноябрь 2025',
-          exp_eduson_sub: 'EdTech · продуктовые исследования, метрики и разработка IT-курсов',
+          exp_eduson_sub: 'Обязанности: продуктовые исследования, анализ метрик, разработка и доработка IT-курсов.',
           exp_eduson_b1: 'Разработал 150+ часов IT-контента по Python, веб-разработке, автотестированию и управлению IT-проектами. В результате за год кластер получил +28% к продуктовому портфелю и вырос вдвое по выручке.',
           exp_eduson_b2: 'Провел 15+ съемок с экспертами из Yandex, Sber, Amazon, Booking.com и EPAM. Материалы вошли во все программы кластера.',
           exp_eduson_b3: 'Переработал 85% контента бесплатного курса по Python по результатам A/B-тестов и анализа конверсии. Курс принес около 450 тыс. руб. выручки через неделю после запуска.',
           exp_eduson_b4: 'Провел 7+ продуктовых исследований новых направлений и помог запустить разработку двух курсов, которые в течение двух недель после запуска сделали более 400% плана по месячной выручке.',
           exp_eduson_b5: 'Проанализировал процессы поддержки, выявил ключевые узкие места и разработал фреймворк, который ускорил среднее время ответа на вопрос студента на 60% и сократил расходы на разработку контента на 42%.',
-          exp_eduson_b6: 'Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, который стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.',
+          exp_eduson_b6: 'Доработал и запустил дипломные проекты для курсов по веб-разработке, автотестированию, а также стратегическому управлению в IT, один из которых стал одним из флагманов кластера по выручке со средней оценкой студентов 4.6/5.',
           exp_uin_title: 'ООО «Учет и Налоги» · Младший аналитик данных',
           exp_uin_meta: 'январь 2024 — июль 2024',
-          exp_uin_sub: 'Финансовый аутсорсинг · 1С, Excel, ЭДО и управленческая отчетность',
+          exp_uin_sub: 'Обязанности: сверка данных, сбор реестров, проверка клиентских карточек и подготовка управленческой отчетности.',
           exp_uin_b1: 'Собрал единый реестр по 30 клиентам и связал в нем услуги, оплаты, документы и статусы отчетности из 1С, Excel и ЭДО. Руководитель стал быстрее видеть долги, просрочки и клиентов с риском ухода, а команда сократила время на поиск данных на 30%.',
-          exp_uin_b2: 'Составил пакет sql-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.',
+          exp_uin_b2: 'Составил пакет SQL-инструкций с join, group by, case when и подзапросами для сверки оплат, услуг и отчетных периодов. Команда стала быстрее находить неоплаченные счета на 60–90 тыс. руб. в квартал, а доля просроченной дебиторки на рабочем участке снизилась на 12–15%.',
           exp_uin_b3: 'Нашел дубли, пустые поля и ошибки в клиентских карточках и реестрах. Бухгалтеры стали тратить на ручные сверки на 6 часов в неделю меньше и успевали вести больше клиентских задач без потери качества.',
           exp_uin_b4: 'Составил управленческий отчёт для руководителя по срокам сдачи и статусам отправки отчетности. Команда стала раньше замечать риск срыва срока, а число срочных задач в конце месяца снизилось на 20%.',
           sec_education: 'Образование',
@@ -609,58 +664,75 @@
           extra_meta_present: '2026 — н.в.',
           extra_meta_present_2: '2026 — н.в.',
           extra_meta_present_3: '2026 — н.в.',
+          extra_meta_present_4: '2026 — н.в.',
           extra_analytics_title: 'VK Education · Прикладная аналитика данных',
           extra_analytics_text: 'Разбираю Big Data, ETL, Data Quality, BI-системы, SQL, Python, скоринг, приоритизацию задач и работу с гипотезами. Курс помогает лучше понимать, как данные проходят путь от источника до решения в продукте.',
           extra_devops_title: 'VK Education · DevOps/SRE-инженер',
           extra_devops_text: 'Изучаю Linux, сети, веб-архитектуру, Docker, Kubernetes, мониторинг сервисов и типовые сбои в инфраструктуре. Курс помогает лучше понимать инфраструктуру прода, увереннее диагностировать сбои и точнее работать с надежностью сервисов.',
           extra_dist_title: 'VK Education · Распределенные вычисления',
           extra_dist_text: 'Изучаю сетевые протоколы, оптимизацию запросов, шардирование и репликацию. Дальше буду изучать NoSQL, Apache Kafka, SRE, observability и нагрузочное тестирование. Курс помогает лучше понимать, как работают высоконагруженные системы и как делать их устойчивыми.',
+          extra_greenatom_title: 'Гринатом · Облачные сервисы',
+          extra_greenatom_text: 'Изучаю облачные сервисы VK Cloud, где на практике работаю с сетями, виртуальными машинами, балансировщиком, Object Storage S3, Managed PostgreSQL, OpenStack и базовой автоматизацией. Программа помогает лучше понимать облачную инфраструктуру, сетевые сценарии и работу сервисов данных в облаке.',
           sec_tools: 'Инструменты',
-          tool_product_analytics: 'продуктовая аналитика',
-          tool_product_research: 'продуктовые исследования',
           sec_languages: 'Языки',
           lang_english: 'English',
           lang_russian: 'Русский',
           lang_native: 'родной'
         },
         en: {
-          document_title: 'Vlad Smirnov — CV',
+          document_title: 'Vladislav Smirnov — CV',
           name: 'Vlad Smirnov',
           role: 'Data Engineering Intern',
           btn_download: 'Download CV as PDF',
-          summary: 'Master’s student in Data Science at HSE FCS with experience in analytics across accounting outsourcing and online education. Currently focused on data engineering, ETL pipelines, distributed data processing, backend services, DevOps, and SRE practices. Particularly interested in understanding how data systems work under the hood and how to make them robust and reliable.',
+          summary: 'Master’s student in Data Science at HSE FCS with experience in analytics across accounting outsourcing and online education. Currently focused on data engineering and building projects around ETL pipelines, distributed data processing, backend services, and DevOps and SRE practices. Particularly interested in understanding how data systems work under the hood and how to make them robust and reliable.',
           sec_projects: 'Projects',
+          project_etl_stack: 'Stack: Python, PostgreSQL, ClickHouse, onETL, PySpark, FastAPI, Celery, Redis, Docker, Kubernetes',
           project_etl_intro: 'Built an ETL pipeline for e-commerce data and designed a full path from source systems to an analytical layer. The project loads data into PostgreSQL, reads it with onETL and Spark, processes it in Spark, and writes the result to ClickHouse.',
           project_etl_b1: 'Split the pipeline into full and incremental modes, moved both flows into separate Spark jobs, and added HWM tracking in a YAML file. This made it possible to run the first full snapshot separately, rerun the entire dataset, and process only new data after the latest checkpoint.',
-          project_etl_b2: 'Set up unified service configuration through `config.yaml`, `.env`, ConfigMap, and Secret so the same service can run locally and in Kubernetes without manual parameter changes before each launch.',
+          project_etl_b2: 'Set up unified service configuration through config.yaml, .env, ConfigMap, and Secret so the same service can run locally and in Kubernetes without manual parameter changes before each launch.',
           project_etl_b3: 'Built an HTTP API with FastAPI and background tasks with Celery and Redis. The API makes it possible to trigger full and incremental ETL runs, check the status of a specific task, and keep a history of recent runs.',
           project_etl_b4: 'Improved the processing layer, added bot-activity filters, and moved source reading, transformations, and task history into separate services to make the pipeline easier to extend and test.',
           project_etl_b5: 'Prepared two launch scenarios, one locally through Docker Compose and one in Kubernetes through Dockerfile, a spark-submit job, and a set of manifests for Minikube.',
+          project_etl_status: 'This project gave me a clearer understanding of how to build an ETL service with two loading modes, keep configuration in one place, and separate local and Kubernetes execution scenarios.',
+          project_gazprom_stack: 'Stack: Python, PostgreSQL, Docker Compose, Data Vault 2.0',
+          project_gazprom_intro: 'Built an ELT project that pulls data from a REST API, loads it into the STG layer in PostgreSQL, and moves it into DDS using a Data Vault 2.0 model.',
+          project_gazprom_b1: 'Set up local PostgreSQL through Docker Compose, prepared schemas and tables for the STG and DDS layers, and configured the environment for local runs.',
+          project_gazprom_b2: 'Wrote two Python scripts: the first loads a fresh snapshot from the REST API into STG, and the second moves rows into DDS and calculates hash keys for hub, link, and satellite tables.',
+          project_gazprom_b3: 'Structured the data according to Data Vault 2.0 so that business keys, relationships, and descriptive attributes stay separate, while repeated loads do not duplicate identical post details.',
+          project_gazprom_status: 'The project helped me better understand how STG and DDS differ, why business keys and relationships are split into separate entities, and what a simple Data Vault 2.0 load looks like.',
+          project_flights_stack: 'Stack: Python, PostgreSQL, Apache Airflow, S3, Jupyter',
+          project_flights_intro: 'Built the first part of a flight data warehouse project where the STG layer takes raw files, normalizes fields, and loads data into PostgreSQL.',
+          project_flights_b1: 'Set up ingestion of flight data from S3 and the airports reference file so that the next warehouse layer works with data already loaded into PostgreSQL instead of raw sources.',
+          project_flights_b2: 'Built an Airflow DAG for loading and for the overall pipeline run so that execution order and orchestration are handled in one place.',
+          project_flights_b3: 'Checked the result through SQL and Jupyter to make sure the data lands correctly in STG and is ready for the next warehouse layers.',
+          project_flights_status: 'This project made the role of the first warehouse layer clearer to me, along with the connection between source ingestion, orchestration in Airflow, and preparing the base for the next DWH layers.',
+          project_yadro_stack: 'Stack: Python, Docker, Ansible, Linux',
+          project_yadro_intro: 'Built a small infrastructure project for HTTP-check automation that includes a Python script, a Docker image, and an execution scenario through Ansible.',
+          project_yadro_b1: 'Wrote a Python script that sends requests to a service with different status codes, logs the responses, and does not stop the whole run if one of the requests fails.',
+          project_yadro_b2: 'Built a Docker image with Python and dependencies so the script can run in a container without manual environment setup on the host.',
+          project_yadro_b3: 'Wrote an Ansible playbook that prepares Docker, builds the image, starts the container, and checks the result through logs.',
+          project_yadro_status: 'After this project, it became clearer to me how to build a small infrastructure scenario end to end — from a Python script to a container and an automated run through Ansible.',
+          project_rel_stack: 'Stack: Python, Bash, Docker, Linux, systemd',
           project_rel_intro: 'Building an educational lab around a small service to study application operations, typical failures, and core SRE scenarios in one place.',
           project_rel_b1: 'Added a Docker environment for local startup, moved infrastructure files into separate directories, and prepared a lab that can be launched quickly and reproduced repeatedly.',
           project_rel_b2: 'Designed a dedicated systemd failure scenario to investigate service downtime, read logs, find the root cause, and recover the application manually.',
-          project_rel_b3: 'Organized the project into `app`, `config`, `infra/docker`, `labs/linux/systemd-failure`, and `scripts` layers to separate service code, configuration, infrastructure, and scenarios.',
-          project_rel_status: 'I continue to develop the project and gradually add new scenarios to turn it into a complete educational environment for Linux, networking, containers, monitoring, and incident analysis.',
-          project_map_intro: 'Building a service that helps visualize the data lifecycle and manage relationships between components through a backend, frontend, and PostgreSQL schema.',
-          project_map_b1: 'Implemented dependency analysis logic and graph data preparation so the interface can show direct links between nodes and launch impact analysis for changes.',
-          project_map_b2: 'Improved the Streamlit interface, added a graph view, highlighting for affected nodes, forms for creating and deleting components and dependencies, and moved controls and analysis into the sidebar.',
-          project_map_b3: 'Set up local startup through Docker Compose and connected the frontend, backend, and database so the service is easier to run and verify after each new iteration.',
-          project_map_status: 'I continue to develop the project and improve the interface and CRUD scenarios so the map becomes more useful for real change analysis in data and services.',
+          project_rel_b3: 'Organized the project into app, config, infra/docker, labs/linux/systemd-failure, and scripts layers to separate service code, configuration, infrastructure, and scenarios.',
+          project_rel_status: 'The project helps me better understand how to reproduce a service failure, break down a systemd incident step by step, and build a simple educational lab around an infrastructure scenario. I continue to develop the project and gradually add new scenarios.',
           sec_experience: 'Experience',
           exp_eduson_title: 'Eduson.tv · Analyst-Methodologist',
           exp_eduson_meta: 'July 2024 — November 2025',
-          exp_eduson_sub: 'EdTech · product research, metrics, and IT course development',
+          exp_eduson_sub: 'Responsibilities: product research, metrics analysis, development and improvement of IT courses.',
           exp_eduson_b1: 'Developed 150+ hours of IT content in Python, web development, test automation, and IT project management. Over the year, the cluster expanded its product portfolio by 28% and doubled revenue.',
           exp_eduson_b2: 'Ran 15+ filming sessions with experts from Yandex, Sber, Amazon, Booking.com, and EPAM. The materials became part of all cluster programs.',
           exp_eduson_b3: 'Reworked 85% of the free Python course content based on A/B tests and conversion analysis. The course generated about USD 6k in revenue within a week after launch.',
           exp_eduson_b4: 'Conducted 7+ product studies of new directions and helped launch the development of two courses that exceeded 400% of the monthly revenue target within two weeks after launch.',
           exp_eduson_b5: 'Analyzed support processes, identified key bottlenecks, and developed a framework that reduced the average response time to student questions by 60% and cut content development costs by 42%.',
-          exp_eduson_b6: 'Refined and launched a capstone project for web development, test automation, and strategic IT management courses that became one of the cluster’s flagship products by revenue with an average student rating of 4.6/5.',
+          exp_eduson_b6: 'Refined and launched capstone projects for web development, test automation, and strategic IT management courses, one of which became one of the cluster’s flagship products by revenue with an average student rating of 4.6/5.',
           exp_uin_title: 'Accounting and Taxes LLC · Junior Data Analyst',
           exp_uin_meta: 'January 2024 — July 2024',
-          exp_uin_sub: 'Financial outsourcing · 1C, Excel, EDI, and management reporting',
+          exp_uin_sub: 'Responsibilities: data reconciliation, registry preparation, client card checks, and management reporting.',
           exp_uin_b1: 'Built a unified register for 30 clients and connected services, payments, documents, and reporting statuses from 1C, Excel, and EDI. This helped the manager see debts, delays, and at-risk clients faster, while the team reduced data search time by 30%.',
-          exp_uin_b2: 'Prepared a package of SQL queries with joins, group by, case when, and subqueries to reconcile payments, services, and reporting periods. The team found unpaid invoices worth about USD 800–1.2k per quarter faster, while overdue receivables in the work area decreased by 12–15%.',
+          exp_uin_b2: 'Prepared a package of SQL instructions with join, group by, case when, and subqueries to reconcile payments, services, and reporting periods. The team found unpaid invoices worth about USD 800–1.2k per quarter faster, while overdue receivables in the work area decreased by 12–15%.',
           exp_uin_b3: 'Found duplicates, empty fields, and errors in client cards and registers. Accountants reduced manual reconciliation work by 6 hours per week and handled more client tasks without losing quality.',
           exp_uin_b4: 'Prepared a management report on reporting deadlines and submission statuses. The team started spotting deadline risks earlier, and the number of urgent end-of-month tasks dropped by 20%.',
           sec_education: 'Education',
@@ -674,15 +746,16 @@
           extra_meta_present: '2026 — present',
           extra_meta_present_2: '2026 — present',
           extra_meta_present_3: '2026 — present',
+          extra_meta_present_4: '2026 — present',
           extra_analytics_title: 'VK Education · Applied Data Analytics',
           extra_analytics_text: 'Studying Big Data, ETL, Data Quality, BI systems, SQL, Python, scoring, prioritization, and hypothesis work. The course helps me better understand how data moves from a source to a product decision.',
           extra_devops_title: 'VK Education · DevOps/SRE Engineer',
           extra_devops_text: 'Studying Linux, networks, web architecture, Docker, Kubernetes, service monitoring, and typical infrastructure failures. The course helps me better understand production infrastructure, diagnose failures more confidently, and work with service reliability more accurately.',
           extra_dist_title: 'VK Education · Distributed Computing',
           extra_dist_text: 'Studying network protocols, query optimization, sharding, and replication. Next, I will study NoSQL, Apache Kafka, SRE, observability, and load testing. The course helps me better understand how high-load systems work and how to make them resilient.',
+          extra_greenatom_title: 'Greenatom · Cloud Services',
+          extra_greenatom_text: 'Studying VK Cloud services through hands-on work with networks, virtual machines, load balancing, Object Storage S3, Managed PostgreSQL, OpenStack, and basic automation. The program helps me better understand cloud infrastructure, networking scenarios, and how data services work in the cloud.',
           sec_tools: 'Tools',
-          tool_product_analytics: 'product analytics',
-          tool_product_research: 'product research',
           sec_languages: 'Languages',
           lang_english: 'English',
           lang_russian: 'Russian',
