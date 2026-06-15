@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vladislav Smirnov — CV</title>
+  <title>Vladislav Smirnov : CV</title>
   <style>
     :root {
       --bg: #f3f5f8;
@@ -365,7 +365,7 @@
 
       <div class="block">
         <div class="item-head">
-          <h3 class="item-title">ETL E-commerce Clickstream</h3>
+          <h3 class="item-title">E-commerce ETL</h3>
         </div>
         <p class="item-sub" data-i18n="project_etl_stack">Стек: Python, PostgreSQL, ClickHouse, onETL, PySpark, FastAPI, Celery, Redis, Docker, Kubernetes</p>
         <p class="project-intro" data-i18n="project_etl_intro">Собрал ETL-пайплайн для данных интернет-магазина и выстроил полный маршрут данных от источника до аналитической витрины. Проект загружает данные в PostgreSQL, читает их с помощью onETL и Spark, обрабатывает в Spark и записывает результат в ClickHouse.</p>
@@ -382,16 +382,18 @@
 
       <div class="block">
         <div class="item-head">
-          <h3 class="item-title">Data Vault Posts Loader</h3>
+          <h3 class="item-title">Posts Data Vault</h3>
         </div>
         <p class="item-sub" data-i18n="project_gazprom_stack">Стек: Python, PostgreSQL, Docker Compose, Data Vault 2.0</p>
         <p class="project-intro" data-i18n="project_gazprom_intro">Собрал ELT-проект, который забирает данные из REST API, загружает их в слой STG в PostgreSQL и перекладывает в DDS по модели Data Vault 2.0.</p>
         <ol>
-          <li data-i18n="project_gazprom_b1">Поднял локальный PostgreSQL через Docker Compose, подготовил схемы и таблицы для слоев STG и DDS и настроил окружение для локального запуска.</li>
-          <li data-i18n="project_gazprom_b2">Написал два Python-скрипта: первый загружает свежий снимок данных из REST API в STG, второй переносит строки в DDS и считает hash key для hub, link и satellite-таблиц.</li>
-          <li data-i18n="project_gazprom_b3">Разложил данные по модели Data Vault 2.0 так, чтобы бизнес-ключи, связи и описательные атрибуты лежали отдельно, а повторная загрузка не дублировала одинаковые версии деталей поста.</li>
+          <li data-i18n="project_gazprom_b1">Поднял локальный PostgreSQL через Docker Compose и подготовил .env для локального запуска, чтобы Python-скрипты и база работали в одном окружении.</li>
+          <li data-i18n="project_gazprom_b2">Создал схемы и таблицы для слоев STG и DDS, чтобы отдельно хранить исходные строки, бизнес-ключи, связи и описательные атрибуты.</li>
+          <li data-i18n="project_gazprom_b3">Написал первый ELT-скрипт, который забирает данные из REST API, очищает таблицу stg.posts и загружает в нее свежий снимок источника вместе с техническими полями.</li>
+          <li data-i18n="project_gazprom_b4">Написал второй ELT-скрипт, который читает STG, считает hash key и загружает данные в hub, link и satellite-таблицы слоя DDS.</li>
+          <li data-i18n="project_gazprom_b5">Разложил id, user_id, title и body по модели Data Vault 2.0 так, чтобы повторный запуск не дублировал одинаковые версии деталей поста и модель оставалась прозрачной по сущностям и связям.</li>
         </ol>
-        <p class="project-status" data-i18n="project_gazprom_status">В ходе проекта мне стало понятнее, как разделять слои STG и DDS, зачем выносить бизнес-ключи и связи в отдельные сущности и как выглядит простая загрузка в Data Vault 2.0.</p>
+        <p class="project-status" data-i18n="project_gazprom_status">После проекта мне стало понятнее, как собирать простую ELT-цепочку от API до DDS, разделять сущности в Data Vault и не плодить дубли в satellite-таблице.</p>
         <a class="project-link" href="https://github.com/tadzhnahal/gazprom-data-vault-posts-task" target="_blank" rel="noreferrer">github.com/tadzhnahal/gazprom-data-vault-posts-task</a>
       </div>
 
@@ -400,45 +402,18 @@
           <h3 class="item-title">Flights DWH</h3>
         </div>
         <p class="item-sub" data-i18n="project_flights_stack">Стек: Python, PostgreSQL, Apache Airflow, S3, Jupyter</p>
-        <p class="project-intro" data-i18n="project_flights_intro">Собрал первую часть проекта по хранилищу данных для рейсов, где STG-слой принимает исходные файлы, приводит поля к единому виду и загружает данные в PostgreSQL.</p>
+        <p class="project-intro" data-i18n="project_flights_intro">Собрал свою часть проекта по хранилищу данных для рейсов, где STG-слой принимает исходные файлы, приводит поля к единому виду и загружает данные в PostgreSQL.</p>
         <ol>
-          <li data-i18n="project_flights_b1">Настроил загрузку данных о рейсах из S3 и справочника аэропортов из отдельного файла, чтобы следующий слой хранилища работал уже с данными в PostgreSQL, а не с сырыми источниками.</li>
-          <li data-i18n="project_flights_b2">Собрал Airflow DAG для запуска загрузки и общего прохода пайплайна, чтобы запуск и порядок шагов были собраны в одном оркестраторе.</li>
-          <li data-i18n="project_flights_b3">Проверил результат через SQL и Jupyter, чтобы убедиться, что данные корректно попадают в STG и подходят для следующих слоев хранилища.</li>
+          <li data-i18n="project_flights_b1">Подготовил схемы team_vdga_stg и team_vdga_metadata, таблицы flights_raw и airports, а также технический лог etl_load_log, чтобы первый слой хранилища и метаданные жили отдельно.</li>
+          <li data-i18n="project_flights_b2">Настроил загрузку справочника аэропортов из файла ourairports.csv в PostgreSQL, чтобы справочные данные попадали в STG вместе с основным потоком.</li>
+          <li data-i18n="project_flights_b3">Собрал загрузчик рейсов из S3 в формате csv.gz и сделал его инкрементальным, чтобы в STG попадали новые данные без повторной полной перезаливки.</li>
+          <li data-i18n="project_flights_b4">Подключил шаги загрузки к Airflow, чтобы STG-слой запускался как отдельной частью пайплайна и одновременно встраивался в общий проход по слоям.</li>
+          <li data-i18n="project_flights_b5">Проверил результат через SQL и Jupyter: данные появились в STG, ключевые поля не пустые, а лог загрузки совпадает с фактическими строками в таблицах.</li>
         </ol>
-        <p class="project-status" data-i18n="project_flights_status">Этот проект помог мне лучше понять роль первого слоя хранилища, связь между загрузкой источников и оркестрацией в Airflow и то, как подготавливают базу для следующих слоев DWH.</p>
+        <p class="project-status" data-i18n="project_flights_status">Этот проект помог мне лучше понять, как устроен первый слой DWH, зачем ему нужен технический лог и как подготовить STG так, чтобы следующие слои уже не работали с сырыми файлами.</p>
         <a class="project-link" href="https://github.com/tadzhnahal/flights-dwh" target="_blank" rel="noreferrer">github.com/tadzhnahal/flights-dwh</a>
       </div>
-
-      <div class="block">
-        <div class="item-head">
-          <h3 class="item-title">HTTP Status Checker Automation</h3>
-        </div>
-        <p class="item-sub" data-i18n="project_yadro_stack">Стек: Python, Docker, Ansible, Linux</p>
-        <p class="project-intro" data-i18n="project_yadro_intro">Собрал небольшой инфраструктурный проект для автоматизации HTTP-проверок, который включает Python-скрипт, Docker-образ и сценарий запуска через Ansible.</p>
-        <ol>
-          <li data-i18n="project_yadro_b1">Написал Python-скрипт, который отправляет запросы к сервису с разными статус-кодами, пишет ответы в лог и не останавливает весь проход, если один из запросов завершается ошибкой.</li>
-          <li data-i18n="project_yadro_b2">Собрал Docker-образ с Python и зависимостями, чтобы скрипт запускался в контейнере без ручной подготовки окружения на хосте.</li>
-          <li data-i18n="project_yadro_b3">Написал Ansible playbook, который готовит Docker, собирает образ, запускает контейнер и проверяет результат по логам.</li>
-        </ol>
-        <p class="project-status" data-i18n="project_yadro_status">После проекта мне стало понятнее, как собирать небольшой инфраструктурный сценарий целиком: от Python-скрипта до контейнера и автоматизированного запуска через Ansible.</p>
-        <a class="project-link" href="https://github.com/tadzhnahal/yadro-infra-platform-task" target="_blank" rel="noreferrer">github.com/tadzhnahal/yadro-infra-platform-task</a>
-      </div>
-
-      <div class="block">
-        <div class="item-head">
-          <h3 class="item-title">Reliability Lab</h3>
-        </div>
-        <p class="item-sub" data-i18n="project_rel_stack">Стек: Python, Bash, Docker, Linux, systemd</p>
-        <p class="project-intro" data-i18n="project_rel_intro">Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.</p>
-        <ol>
-          <li data-i18n="project_rel_b1">Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.</li>
-          <li data-i18n="project_rel_b2">Оформил отдельный сценарий со сбоем systemd, чтобы разбирать отказ сервиса, читать логи, находить причину поломки и вручную восстанавливать работу приложения.</li>
-          <li data-i18n="project_rel_b3">Разложил проект по слоям app, config, infra/docker, labs/linux/systemd-failure и scripts, чтобы отделить код сервиса, конфиг, инфраструктуру и сценарии.</li>
-        </ol>
-        <p class="project-status" data-i18n="project_rel_status">Проект помогает мне лучше понимать, как воспроизводить сбой сервиса, шаг за шагом разбирать отказ systemd и собирать простой учебный стенд вокруг инфраструктурного сценария. Продолжаю работу над проектом и постепенно добавляю новые сценарии.</p>
-        <a class="project-link" href="https://github.com/tadzhnahal/reliability-lab" target="_blank" rel="noreferrer">github.com/tadzhnahal/reliability-lab</a>
-      </div>
+    </section>
     </section>
 
     <section class="section">
@@ -598,7 +573,7 @@
 
       const translations = {
         ru: {
-          document_title: 'Vladislav Smirnov — CV',
+          document_title: 'Vladislav Smirnov : CV',
           name: 'Владислав Смирнов',
           role: 'Data Engineering Intern',
           btn_download: 'Скачать CV в PDF',
@@ -614,22 +589,26 @@
           project_etl_status: 'По итогам проекта мне стало понятнее, как собирать ETL-сервис с двумя режимами загрузки, держать конфигурацию в одном месте и отдельно выстраивать локальный и Kubernetes-сценарии запуска.',
           project_gazprom_stack: 'Стек: Python, PostgreSQL, Docker Compose, Data Vault 2.0',
           project_gazprom_intro: 'Собрал ELT-проект, который забирает данные из REST API, загружает их в слой STG в PostgreSQL и перекладывает в DDS по модели Data Vault 2.0.',
-          project_gazprom_b1: 'Поднял локальный PostgreSQL через Docker Compose, подготовил схемы и таблицы для слоев STG и DDS и настроил окружение для локального запуска.',
-          project_gazprom_b2: 'Написал два Python-скрипта: первый загружает свежий снимок данных из REST API в STG, второй переносит строки в DDS и считает hash key для hub, link и satellite-таблиц.',
-          project_gazprom_b3: 'Разложил данные по модели Data Vault 2.0 так, чтобы бизнес-ключи, связи и описательные атрибуты лежали отдельно, а повторная загрузка не дублировала одинаковые версии деталей поста.',
-          project_gazprom_status: 'В ходе проекта мне стало понятнее, как разделять слои STG и DDS, зачем выносить бизнес-ключи и связи в отдельные сущности и как выглядит простая загрузка в Data Vault 2.0.',
+          project_gazprom_b1: 'Поднял локальный PostgreSQL через Docker Compose и подготовил .env для локального запуска, чтобы Python-скрипты и база работали в одном окружении.',
+          project_gazprom_b2: 'Создал схемы и таблицы для слоев STG и DDS, чтобы отдельно хранить исходные строки, бизнес-ключи, связи и описательные атрибуты.',
+          project_gazprom_b3: 'Написал первый ELT-скрипт, который забирает данные из REST API, очищает таблицу stg.posts и загружает в нее свежий снимок источника вместе с техническими полями.',
+          project_gazprom_b4: 'Написал второй ELT-скрипт, который читает STG, считает hash key и загружает данные в hub, link и satellite-таблицы слоя DDS.',
+          project_gazprom_b5: 'Разложил id, user_id, title и body по модели Data Vault 2.0 так, чтобы повторный запуск не дублировал одинаковые версии деталей поста и модель оставалась прозрачной по сущностям и связям.',
+          project_gazprom_status: 'После проекта мне стало понятнее, как собирать простую ELT-цепочку от API до DDS, разделять сущности в Data Vault и не плодить дубли в satellite-таблице.',
           project_flights_stack: 'Стек: Python, PostgreSQL, Apache Airflow, S3, Jupyter',
-          project_flights_intro: 'Собрал первую часть проекта по хранилищу данных для рейсов, где STG-слой принимает исходные файлы, приводит поля к единому виду и загружает данные в PostgreSQL.',
-          project_flights_b1: 'Настроил загрузку данных о рейсах из S3 и справочника аэропортов из отдельного файла, чтобы следующий слой хранилища работал уже с данными в PostgreSQL, а не с сырыми источниками.',
-          project_flights_b2: 'Собрал Airflow DAG для запуска загрузки и общего прохода пайплайна, чтобы запуск и порядок шагов были собраны в одном оркестраторе.',
-          project_flights_b3: 'Проверял результат через SQL и Jupyter, чтобы убедиться, что данные корректно попадают в STG и подходят для следующих слоев хранилища.',
-          project_flights_status: 'Этот проект помог мне лучше понять роль первого слоя хранилища, связь между загрузкой источников и оркестрацией в Airflow и то, как подготавливают базу для следующих слоев DWH.',
+          project_flights_intro: 'Собрал свою часть проекта по хранилищу данных для рейсов, где STG-слой принимает исходные файлы, приводит поля к единому виду и загружает данные в PostgreSQL.',
+          project_flights_b1: 'Подготовил схемы team_vdga_stg и team_vdga_metadata, таблицы flights_raw и airports, а также технический лог etl_load_log, чтобы первый слой хранилища и метаданные жили отдельно.',
+          project_flights_b2: 'Настроил загрузку справочника аэропортов из файла ourairports.csv в PostgreSQL, чтобы справочные данные попадали в STG вместе с основным потоком.',
+          project_flights_b3: 'Собрал загрузчик рейсов из S3 в формате csv.gz и сделал его инкрементальным, чтобы в STG попадали новые данные без повторной полной перезаливки.',
+          project_flights_b4: 'Подключил шаги загрузки к Airflow, чтобы STG-слой запускался как отдельной частью пайплайна и одновременно встраивался в общий проход по слоям.',
+          project_flights_b5: 'Проверил результат через SQL и Jupyter: данные появились в STG, ключевые поля не пустые, а лог загрузки совпадает с фактическими строками в таблицах.',
+          project_flights_status: 'Этот проект помог мне лучше понять, как устроен первый слой DWH, зачем ему нужен технический лог и как подготовить STG так, чтобы следующие слои уже не работали с сырыми файлами.',
           project_yadro_stack: 'Стек: Python, Docker, Ansible, Linux',
           project_yadro_intro: 'Собрал небольшой инфраструктурный проект для автоматизации HTTP-проверок, который включает Python-скрипт, Docker-образ и сценарий запуска через Ansible.',
           project_yadro_b1: 'Написал Python-скрипт, который отправляет запросы к сервису с разными статус-кодами, пишет ответы в лог и не останавливает весь проход, если один из запросов завершается ошибкой.',
           project_yadro_b2: 'Собрал Docker-образ с Python и зависимостями, чтобы скрипт запускался в контейнере без ручной подготовки окружения на хосте.',
           project_yadro_b3: 'Написал Ansible playbook, который готовит Docker, собирает образ, запускает контейнер и проверяет результат по логам.',
-          project_yadro_status: 'После проекта мне стало понятнее, как собирать небольшой инфраструктурный сценарий целиком — от Python-скрипта до контейнера и автоматизированного запуска через Ansible.',
+          project_yadro_status: 'После проекта мне стало понятнее, как собирать небольшой инфраструктурный сценарий целиком : от Python-скрипта до контейнера и автоматизированного запуска через Ansible.',
           project_rel_stack: 'Стек: Python, Bash, Docker, Linux, systemd',
           project_rel_intro: 'Собираю учебный стенд вокруг небольшого сервиса, чтобы на одной базе разбирать эксплуатацию приложения, типовые сбои и базовые SRE-сценарии.',
           project_rel_b1: 'Добавил Docker-окружение для локального запуска, вынес инфраструктурные файлы в отдельные каталоги и подготовил стенд, который можно быстро поднять и повторно воспроизвести.',
@@ -680,7 +659,7 @@
           lang_native: 'родной'
         },
         en: {
-          document_title: 'Vladislav Smirnov — CV',
+          document_title: 'Vladislav Smirnov : CV',
           name: 'Vlad Smirnov',
           role: 'Data Engineering Intern',
           btn_download: 'Download CV as PDF',
@@ -711,7 +690,7 @@
           project_yadro_b1: 'Wrote a Python script that sends requests to a service with different status codes, logs the responses, and does not stop the whole run if one of the requests fails.',
           project_yadro_b2: 'Built a Docker image with Python and dependencies so the script can run in a container without manual environment setup on the host.',
           project_yadro_b3: 'Wrote an Ansible playbook that prepares Docker, builds the image, starts the container, and checks the result through logs.',
-          project_yadro_status: 'After this project, it became clearer to me how to build a small infrastructure scenario end to end — from a Python script to a container and an automated run through Ansible.',
+          project_yadro_status: 'After this project, it became clearer to me how to build a small infrastructure scenario end to end : from a Python script to a container and an automated run through Ansible.',
           project_rel_stack: 'Stack: Python, Bash, Docker, Linux, systemd',
           project_rel_intro: 'Building an educational lab around a small service to study application operations, typical failures, and core SRE scenarios in one place.',
           project_rel_b1: 'Added a Docker environment for local startup, moved infrastructure files into separate directories, and prepared a lab that can be launched quickly and reproduced repeatedly.',
